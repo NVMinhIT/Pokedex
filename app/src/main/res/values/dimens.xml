@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    size image -->
+
+    <dimen name="image_pokemon_height">50dp</dimen>
+    <dimen name="image_pokemon_width">50dp</dimen>
+    <dimen name="image_icon_button_height">40dp</dimen>
+    <dimen name="image_icon_button_width">40dp</dimen>
+    <dimen name="icon_tab_height">28dp</dimen>
+    <dimen name="icon_tab_width">28dp</dimen>
+    <dimen name="icons_description_height">36dp</dimen>
+    <dimen name="icons_description_width">36dp</dimen>
+    <!--text size-->
+    <dimen name="text_size_name">19sp</dimen>
+    <dimen name="text_size_large">40sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_normal">15sp</dimen>
+    <dimen name="text_size_small">13sp</dimen>
+    <dimen name="text_size_smaller">12sp</dimen>
+
+
+    <!--button size-->
+    <dimen name="action_button_height">56dp</dimen>
+    <dimen name="close_button_size">32dp</dimen>
+    <dimen name="refresh_button_size">32dp</dimen>
+
+
+    <!--padding-->
+    <dimen name="padding_micro">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_large_small">32dp</dimen>
+    <dimen name="padding_large">40dp</dimen>
+
+    <!--margin-->
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="margin_small_min">8dp</dimen>
+    <dimen name="margin_normal">20dp</dimen>
+    <dimen name="margin_normal_small">12dp</dimen>
+    <dimen name="margin_large_small">32dp</dimen>
+    <dimen name="margin_large">40dp</dimen>
+
+    <dimen name="border_width">1dp</dimen>
+    <dimen name="select_button_height">48dp</dimen>
+    <dimen name="select_button_width">100dp</dimen>
+    <dimen name="calculator_dialog_width">420dp</dimen>
+    <dimen name="item_unit_height">56dp</dimen>
+    <dimen name="button_action_width">56dp</dimen>
+    <dimen name="view_dot_size">10dp</dimen>
+    <dimen name="footer_height">56dp</dimen>
+    <dimen name="logo_lite_size">86dp</dimen>
+    <dimen name="action_bar_size">48dp</dimen>
+    <dimen name="item_restaurant_type_height">48dp</dimen>
+    <dimen name="diliver_height">0.6dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="img_foward_witdh">40dp</dimen>
+    <dimen name="img_require_width">6dp</dimen>
+
+
+    <dimen name="close_button_height">32dp</dimen>
+    <dimen name="close_button_width">32dp</dimen>
+    <dimen name="water_mark_height">220dp</dimen>
+    <dimen name="direct_top_height">200dp</dimen>
+    <dimen name="table_icon_size">36dp</dimen>
+    <dimen name="min_width_tv_number_select">48dp</dimen>
+    <dimen name="corner_quality_layout">32dp</dimen>
+    <dimen name="item_order_default_height">140dp</dimen>
+    <dimen name="size_icon_table_sale">64dp</dimen>
+    <dimen name="padding_tv_image">-6dp</dimen>
+</resources>
