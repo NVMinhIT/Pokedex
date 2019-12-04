@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#559edf</color>
-    <color name="colorPrimaryDark">#69b9e3</color>
+    <color name="colorPrimary">#E2F4E6</color>
+    <color name="colorPrimaryDark">#E2F4E6</color>
     <color name="colorAccent">#D81B60</color>
     <color name="dark_sky_blue">#559edf</color>
     <color name="soft_blue">#69b9e3</color>
     <color name="text">#4f4f4f</color>
     <color name="text_hint">#a4a4a4</color>
     <color name="color_bg_button">#1e000000</color>
+    <color name="colorBackgroundNavigation">#E2F4E6</color>
 </resources>
