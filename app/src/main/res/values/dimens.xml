@@ -20,6 +20,7 @@
     <dimen name="text_size_normal">15sp</dimen>
     <dimen name="text_size_small">13sp</dimen>
     <dimen name="text_size_smaller">12sp</dimen>
+    <dimen name="text_size_smallest">10sp</dimen>
 
 
     <!--button size-->
@@ -79,4 +80,5 @@
     <dimen name="item_order_default_height">140dp</dimen>
     <dimen name="size_icon_table_sale">64dp</dimen>
     <dimen name="padding_tv_image">-6dp</dimen>
+    <dimen name="size_56">56dp</dimen>
 </resources>

@@ -3,61 +3,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screen.main.MainActivity">
+    android:layout_height="match_parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="140dp"
-    android:id="@+id/constrain_layout"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:background="#ccfafafa"
-    app:layout_constraintRight_toRightOf="parent">
-
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrain_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="140dp"
+        android:background="#E2F4E6"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="@dimen/margin_xlarge"
-        android:textSize="@dimen/text_size_large"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="@string/pokemon"
-        android:id="@+id/tvTitle"
-        />
-    <EditText
-        android:layout_width="@dimen/action_button_wight"
-        android:layout_height="@dimen/action_button_height"
-        android:background="@drawable/bg_button_search"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="@dimen/margin_small"
-        android:drawableLeft="@drawable/ic_search"
-        android:hint="@string/search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="15dp"
-        android:textColorHint="@color/text"
-        android:drawablePadding="@dimen/padding_small"
-        android:paddingLeft="@dimen/padding_small"
-        android:drawableStart="@drawable/ic_search"
-        android:paddingStart="@dimen/padding_small"
-        android:drawableRight="@drawable/ic_record"
-        tools:ignore="RtlSymmetry"
-        android:paddingRight="@dimen/padding_small"
-        android:drawableEnd="@drawable/ic_record" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:gravity="center"
+            android:text="@string/pokemon"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:layout_width="@dimen/action_button_wight"
+            android:layout_height="@dimen/action_button_height"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_button_search"
+            android:drawableStart="@drawable/ic_search"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawableEnd="@drawable/ic_record"
+            android:drawableRight="@drawable/ic_record"
+            android:drawablePadding="@dimen/padding_small"
+            android:hint="@string/search"
+            android:paddingStart="@dimen/padding_small"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingRight="@dimen/padding_small"
+            android:textColorHint="@color/text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            tools:ignore="RtlSymmetry" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/frLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/constrain_layout"
+        android:layout_marginTop="@dimen/margin_small_min"
+        android:layout_marginBottom="@dimen/margin_small_min"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/constrain_layout"
+        tools:ignore="UselessLeaf" />
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_marginTop="@dimen/margin_small_min"-->
+    <!--        android:layout_marginBottom="@dimen/margin_small_min"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/constrain_layout" />-->
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_56"
+        android:fitsSystemWindows="true"
+        android:visibility="visible"
+        app:itemBackground="@color/colorBackgroundNavigation"
+        app:itemIconTint="@color/text"
+        app:itemTextAppearance="@style/TextStyleBNV"
+        app:itemTextColor="@color/text"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>
