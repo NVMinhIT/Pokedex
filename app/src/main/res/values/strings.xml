@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Pokedex</string>
+    <string name="pokemon">Pokemon</string>
+    <string name="moves">Moves</string>
+    <string name="itens">Itens</string>
+    <string name="search">Search</string>
+    <string name="pokemon_a">Pokemon A</string>
+    <string name="_001">#001</string>
+
 </resources>
