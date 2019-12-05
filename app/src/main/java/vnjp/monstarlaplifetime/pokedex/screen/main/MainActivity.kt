@@ -1,6 +1,8 @@
 package vnjp.monstarlaplifetime.pokedex.screen.main
 
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import vnjp.monstarlaplifetime.pokedex.R
@@ -8,6 +10,7 @@ import vnjp.monstarlaplifetime.pokedex.screen.listpokemon.ListPokemonFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
+
 
     companion object {
         var selectedId: Int = 10
@@ -21,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+
+
         bottomNavigationView = findViewById(R.id.bottom_nav)
         bottomNavigationView.selectedItemId = R.id.action_pokemon
         setBottom(bottomNavigationView.selectedItemId)
@@ -39,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_pokemon -> {
                 val fragment = ListPokemonFragment()
                 supportFragmentManager.beginTransaction()
-                    .add(R.id.frLayout, fragment, fragment.javaClass.getSimpleName())
+                    .replace(R.id.frLayout, fragment, fragment.javaClass.simpleName)
                     .commit()
                 return true
             }

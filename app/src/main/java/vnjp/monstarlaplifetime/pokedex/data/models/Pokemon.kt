@@ -1,4 +1,7 @@
 package vnjp.monstarlaplifetime.pokedex.data.models
 
-class Pokemon() {
-}
+data class Pokemon(
+     val pokemonId: String,
+     val pokemonName: String,
+     val pokemonImage: String
+)

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="38dp"
+    android:layout_gravity="center"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+
+    >
+
+    <ImageView
+        android:id="@+id/imgIconWeakNess"
+        android:layout_width="@dimen/size_icon_weakness_width"
+        android:layout_height="@dimen/size_icon_weakness_height"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvIndexWeakNess"
+        android:layout_width="@dimen/icon_tab_width"
+        android:layout_height="@dimen/icon_tab_width"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:textSize="@dimen/text_size_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/imgIconWeakNess"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
