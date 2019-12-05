@@ -9,4 +9,7 @@
     <color name="text_hint">#a4a4a4</color>
     <color name="color_bg_button">#1e000000</color>
     <color name="colorBackgroundNavigation">#E2F4E6</color>
+    <color name="colorBackgroundDialog">#fafafa</color>
+    <color name="colorBlueSelector">#69b9e3</color>
+    <color name="white_view">#FFFFFF</color>
 </resources>

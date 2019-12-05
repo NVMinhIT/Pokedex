@@ -7,6 +7,12 @@
     <string name="pokemon_a">Pokemon A</string>
     <string name="_001">#001</string>
     <string name="moives">Movies</string>
+    <string name="button_start">STATS</string>
+    <string name="button_evolution">EVOLUTIONS</string>
+    <string name="button_movie">MOVES</string>
+    <string name="name_pokemon">Squirtle</string>
+    <string name="content_pokemon">Squirtle’s shell is not merely used for protection.
+The shell’s rounded shape and the grooves on its surface help minimize resistance in water, enabling this pokemon to swim at high speed.</string>
 
 
 </resources>
