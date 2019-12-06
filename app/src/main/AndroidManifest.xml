@@ -11,9 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".screen.detail.DetailPokemonActivity">
-
-        </activity>
+        <activity android:name=".screen.items.detail.DetailItemsActivity"></activity>
+        <activity android:name=".screen.movie.detail.DetailSkillPokemonActivity" />
+        <activity android:name=".screen.detail.DetailPokemonActivity" />
         <activity android:name=".screen.flash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screen.main.MainActivity">
-
-        </activity>
+        <activity android:name=".screen.main.MainActivity" />
     </application>
 
 </manifest>

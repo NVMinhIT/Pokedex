@@ -64,8 +64,9 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
         fun bind(pokemon: Pokemon) {
             Glide.with(context)
                 .load(Uri.parse(pokemon.pokemonImage))
+                .placeholder(R.drawable.pokemon1)
                 .override(50, 50)
-                .error(R.mipmap.ic_launcher_round)
+                //.error(R.mipmap.ic_launcher_round)
                 .into(imageView)
 
             tvTitle.text = pokemon.pokemonName
