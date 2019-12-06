@@ -14,7 +14,7 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.MyPokemonTheme);
-        setContentView(R.layout.activity_detail_pokemon)
+        setContentView(R.layout.activity_detail_pokemon1)
         initView()
         initEvent()
     }
