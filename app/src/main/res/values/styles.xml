@@ -41,5 +41,25 @@
 
     </style>
 
+    <style name="MyPokemonTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/pokemon_primary</item>
+        <item name="colorPrimaryDark">@color/pokemon_primary_dark</item>
+
+    </style>
+
+    <style name="MyMovieTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/pokemon_primary</item>
+        <item name="colorPrimaryDark">@color/pokemon_primary_dark</item>
+
+    </style>
+
+    <style name="MyItemsTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/items_primary</item>
+        <item name="colorPrimaryDark">@color/items_primary</item>
+
+    </style>
 
 </resources>

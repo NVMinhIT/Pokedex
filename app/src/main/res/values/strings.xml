@@ -2,7 +2,7 @@
     <string name="app_name">Pokedex</string>
     <string name="pokemon">Pokemon</string>
     <string name="moves">Moves</string>
-    <string name="itens">Itens</string>
+    <string name="itens">Items</string>
     <string name="search">Search</string>
     <string name="pokemon_a">Pokemon A</string>
     <string name="_001">#001</string>
@@ -13,6 +13,20 @@
     <string name="name_pokemon">Squirtle</string>
     <string name="content_pokemon">Squirtle’s shell is not merely used for protection.
 The shell’s rounded shape and the grooves on its surface help minimize resistance in water, enabling this pokemon to swim at high speed.</string>
+    <string name="bubble">Bubble</string>
+    <string name="master_ball">Master Ball</string>
+    <string name="movie">Inflicts regular damage. Has a 10% chance to lower the target’s Speed by one stage.</string>
+    <string name="_12000">1200</string>
+    <string name="base_power">Base Power</string>
+    <string name="_40">40</string>
+    <string name="_100">100%</string>
+    <string name="accuracy">Accuracy</string>
+    <string name="pp">PP</string>
+    <string name="ultra_ball">Ultra Ball</string>
+    <string name="items">Used in Battle
+
+Attempts to catch a wild Pokémon, using a catch rate of 2x.
+If used in a trainer battle, nothing happens and the ball is lost.</string>
 
 
 </resources>

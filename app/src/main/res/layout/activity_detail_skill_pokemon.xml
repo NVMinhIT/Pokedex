@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_screen"
+    tools:context=".screen.movie.detail.DetailSkillPokemonActivity">
+
+    <ImageButton
+        android:id="@+id/imbBack"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        android:padding="4dp"
+        android:src="@drawable/ic_down"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+
+    <RelativeLayout
+        android:id="@+id/ctRelativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/size_tap_height"
+        android:background="@drawable/custom_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_Name_Pokemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small_min"
+        android:text="@string/bubble"
+        android:textColor="@color/text"
+        android:textSize="@dimen/text_big"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_Pokemon"
+        tools:ignore="NotSibling,SpUsage" />
+
+    <ImageView
+        android:id="@+id/img_Water"
+        android:layout_width="@dimen/width_image_small"
+        android:layout_height="@dimen/height_image_smail"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/water"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Name_Pokemon"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_description_skill"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:textColor="@color/text"
+        android:text="@string/movie"
+        android:textSize="@dimen/text_size_normal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_Water" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_xnormal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_xnormal"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_skill"
+        tools:ignore="UselessLeaf">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/base_power"
+                android:textColor="#559edf"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_xnormal"
+                android:text="@string/_40"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_name"
+
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="83dp"
+            android:background="@color/text_hint"
+
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/accuracy"
+                android:textColor="#559edf"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_xnormal"
+                android:text="@string/_100"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_name"
+
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="83dp"
+            android:background="@color/text_hint"
+
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/pp"
+                android:textColor="#559edf"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_xnormal"
+                android:text="@string/_40"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_name"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_Pokemon"
+        android:layout_width="@dimen/size_image_normal"
+        android:layout_height="@dimen/size_image_normal"
+        android:layout_marginTop="@dimen/margin_large_max"
+        android:background="@drawable/ic_water"
+        app:layout_constraintBottom_toTopOf="@+id/ctRelativeLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription,UnusedAttribute" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

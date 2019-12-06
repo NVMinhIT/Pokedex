@@ -1,12 +1,14 @@
 package vnjp.monstarlaplifetime.pokedex.screen.main
 
-import android.os.Build
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 import vnjp.monstarlaplifetime.pokedex.R
+import vnjp.monstarlaplifetime.pokedex.screen.items.ItemsPokemonFragment
 import vnjp.monstarlaplifetime.pokedex.screen.listpokemon.ListPokemonFragment
+import vnjp.monstarlaplifetime.pokedex.screen.movie.ListSkillPokemonFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -23,9 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView() {
-
-
+        tvTitle.text = "Pokemon"
         bottomNavigationView = findViewById(R.id.bottom_nav)
         bottomNavigationView.selectedItemId = R.id.action_pokemon
         setBottom(bottomNavigationView.selectedItemId)
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setBottom(itemId: Int): Boolean {
         if (selectedId == itemId) {
             return true
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         when (itemId) {
 
             R.id.action_pokemon -> {
+                tvTitle?.text = "Pokemon"
                 val fragment = ListPokemonFragment()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.frLayout, fragment, fragment.javaClass.simpleName)
@@ -50,15 +54,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.action_disk -> {
-                //val fragment = ChapterFragment()
-                //supportFragmentManager.beginTransaction().replace(R.id.container, fragment, fragment.javaClass.getSimpleName())
-                //.commit()
+                tvTitle.text = "Movie"
+                val fragmentList = ListSkillPokemonFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.frLayout, fragmentList, fragmentList.javaClass.simpleName)
+                    .commit()
                 return true
             }
             R.id.action_itens -> {
-                //val fragment = StoreFragment()
-                //supportFragmentManager.beginTransaction().replace(R.id.container, fragment, fragment.javaClass.getSimpleName())
-                //.commit()
+                tvTitle.text = "Items"
+                val fragmentItems = ItemsPokemonFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.frLayout, fragmentItems, fragmentItems.javaClass.simpleName)
+                    .commit()
                 return true
             }
         }
