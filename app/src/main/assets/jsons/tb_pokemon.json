@@ -1,0 +1,53 @@
+[
+  {
+    "id": "001",
+    "name": "Bulbasaur",
+    "image": "https://img.pokemondb.net/sprites/sun-moon/icon/bulbasaur.png",
+    "description": null,
+    "pokemonTypes": [
+      "GRASS",
+      "POISON"
+    ]
+  },
+  {
+    "id": "002",
+    "name": "Ivysaur",
+    "image": "https://img.pokemondb.net/sprites/sun-moon/icon/ivysaur.png",
+    "description": null,
+    "pokemonTypes": [
+      "GRASS",
+      "POISON"
+    ]
+  },
+  {
+    "id": "003",
+    "name": "Venusaur",
+    "image": "https://img.pokemondb.net/sprites/sun-moon/icon/venusaur.png",
+    "description": null,
+    "pokemonTypes": [
+      "GRASS",
+      "POISON",
+      "POISON"
+    ]
+  },
+  {
+    "id": "004",
+    "name": "Venusaur",
+    "image": "https://img.pokemondb.net/sprites/sun-moon/icon/venusaur.png",
+    "description": null,
+    "pokemonTypes": [
+      "GRASS",
+      "POISON"
+    ]
+  },
+  {
+    "id": "005",
+    "name": "Venusaur",
+    "image": "https://img.pokemondb.net/sprites/sun-moon/icon/venusaur.png",
+    "description": null,
+    "pokemonTypes": [
+      "GRASS",
+      "POISON"
+    ]
+  }
+]

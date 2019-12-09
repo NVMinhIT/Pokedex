@@ -27,6 +27,40 @@ The shell’s rounded shape and the grooves on its surface help minimize resista
 
 Attempts to catch a wild Pokémon, using a catch rate of 2x.
 If used in a trainer battle, nothing happens and the ball is lost.</string>
+    <string name="hp">HP</string>
+    <string name="_000">000</string>
+    <string name="atk">ATK</string>
+    <string name="def">DEF</string>
+    <string name="satk">SATK</string>
+    <string name="sdef">SDEF</string>
+    <string name="spd">SPD</string>
+    <string name="weaknesses">Weaknesses</string>
+    <string name="abilities">Abilities</string>
+    <string name="torrent">Torrent</string>
+    <string name="powers_up_water_type_moves_when_the_pok_mon_is_in_trouble">Powers up Water-type moves when the Pokémon is in trouble.</string>
+    <string name="breeding">Breeding</string>
+    <string name="egg_group">Egg Group</string>
+    <string name="hatchtime">Hatch Time</string>
+    <string name="gender">Gender</string>
+    <string name="monster">Monster</string>
+    <string name="_5101_steps">5101 Steps</string>
+    <string name="water_i">Water I</string>
+    <string name="_20_cycles">20 Cycles</string>
+    <string name="_12_5">12,5%</string>
+    <string name="_85_5">85,5%</string>
+    <string name="capture">Capture</string>
+    <string name="habitat">Habitat</string>
+    <string name="waters_edge">Waters-Edge</string>
+    <string name="generation">Generation</string>
+    <string name="generation_1">Generation 1</string>
+    <string name="capture_rate">Capture Rate</string>
+    <string name="_45">45%</string>
+    <string name="sprites">Sprites</string>
+    <string name="normal">Normal</string>
+    <string name="shiny">Shiny</string>
+    <string name="lv_16">Lv.16</string>
+    <string name="lv_32">Lv.32</string>
+    <string name="mega_stone">Mega Stone</string>
 
 
 </resources>

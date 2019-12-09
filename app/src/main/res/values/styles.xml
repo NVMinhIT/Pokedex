@@ -62,4 +62,7 @@
 
     </style>
 
+    <style name="myTheme.ActionBar.Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 </resources>
