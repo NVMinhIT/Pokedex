@@ -4,17 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_screen">
+    android:background="#FFFFFF">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_screen"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+
+            >
+
+            <RelativeLayout
+                android:id="@+id/content1"
+                android:layout_width="match_parent"
+                android:layout_height="590dp"
+                android:layout_marginTop="178dp"
+                android:background="@drawable/custom_view"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_Name_Pokemon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="58dp"
+                    android:gravity="center"
+                    android:text="@string/name_pokemon"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/text_big"
+                    tools:ignore="NotSibling,SpUsage" />
+
+                <ImageView
+                    android:id="@+id/img_Water"
+                    android:layout_width="@dimen/width_image_small"
+                    android:layout_height="@dimen/height_image_smail"
+                    android:layout_below="@+id/tv_Name_Pokemon"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/water"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_description_pokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_below="@+id/img_Water"
+                    android:layout_marginStart="@dimen/margin_normal"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_marginTop="@dimen/margin_xnormal"
+                    android:layout_marginEnd="@dimen/margin_normal"
+                    android:gravity="center"
+                    android:text="@string/content_pokemon"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/text_size_normal" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/img_Pokemon"
+                android:layout_width="@dimen/size_image"
+                android:layout_height="@dimen/size_image"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/pokedex"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription,UnusedAttribute" />
+
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -22,142 +91,87 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@drawable/background_screen"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                app:popupTheme="@style/myTheme.ActionBar.Text" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/background_screen">
+        android:background="@drawable/background_screen"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <View
-            android:id="@+id/content1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="128dp"
-            android:background="@drawable/custom_view"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/img_Pokemon"
-            android:layout_width="@dimen/size_image"
-            android:layout_height="@dimen/size_image"
-            android:background="@drawable/pokedex"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription,UnusedAttribute" />
-
-        <TextView
-            android:id="@+id/tv_Name_Pokemon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="@string/name_pokemon"
-            android:textColor="@color/text"
-            android:textSize="@dimen/text_big"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_Pokemon"
-            tools:ignore="NotSibling,SpUsage" />
-
-        <ImageView
-            android:id="@+id/img_Water"
-            android:layout_width="@dimen/width_image_small"
-            android:layout_height="@dimen/height_image_smail"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@drawable/water"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_Name_Pokemon"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_description_pokemon"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="@dimen/margin_normal"
-            android:layout_marginLeft="@dimen/margin_normal"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:gravity="center_horizontal"
-            android:text="@string/content_pokemon"
-            android:textColor="@color/text"
-            android:textSize="@dimen/text_size_normal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_Water" />
-
-        <LinearLayout
-            android:id="@+id/content_button"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:layout_marginTop="@dimen/margin_small"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_small"
-            android:weightSum="3"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description_pokemon">
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_view">
 
-            <Button
-                android:id="@+id/btStart"
-                style="@style/button_active"
+            <LinearLayout
+                android:id="@+id/content_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginLeft="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:layout_weight="1"
-                android:elevation="2dp"
-                android:gravity="center"
-                android:text="@string/button_start"
-                tools:ignore="UnusedAttribute" />
+                android:layout_height="72dp"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_small"
+                android:weightSum="3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:ignore="MissingConstraints">
 
-            <Button
-                android:id="@+id/btEvolution"
-                style="@style/button_noactive"
+                <Button
+                    android:id="@+id/btStart"
+                    style="@style/button_active"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="@string/button_start"
+                    tools:ignore="UnusedAttribute" />
+
+                <Button
+                    android:id="@+id/btEvolution"
+                    style="@style/button_noactive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:text="@string/button_evolution"
+                    tools:ignore="ButtonStyle,UnusedAttribute" />
+                <!--        style="@style/button_noactive"-->
+                <Button
+                    android:id="@+id/btMoves"
+                    style="@style/button_noactive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:text="@string/button_movie"
+                    tools:ignore="ButtonStyle,UnusedAttribute" />
+            </LinearLayout>
+
+
+            <FrameLayout
+                android:id="@+id/content_frame_layout"
                 android:layout_width="match_parent"
+                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginLeft="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:layout_weight="1"
-                android:elevation="2dp"
-                android:text="@string/button_evolution"
-                tools:ignore="ButtonStyle,UnusedAttribute" />
-            <!--        style="@style/button_noactive"-->
-            <Button
-                android:id="@+id/btMoves"
-                style="@style/button_noactive"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:layout_weight="1"
-                android:elevation="2dp"
-                android:text="@string/button_movie"
-                tools:ignore="ButtonStyle,UnusedAttribute" />
-        </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/content_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
-        <RelativeLayout
-            android:id="@+id/content_frame_layout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/content_button" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

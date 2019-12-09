@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/contentLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/hp"
+                        android:textColor="@color/pokemon_primary"
+                        android:textSize="@dimen/text_size_smaller"
+
+                        />
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/_000"
+                        android:textAlignment="textEnd"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/text_size_smaller"
+                        tools:ignore="RtlCompat" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar1"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="240dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="6dp"
+                        android:progressDrawable="@drawable/custom_progress_bar" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/atk"
+                        android:textColor="@color/pokemon_primary"
+                        android:textSize="@dimen/text_size_smaller"
+
+                        />
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/_000"
+                        android:textAlignment="textEnd"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/text_size_smaller"
+                        tools:ignore="RtlCompat" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar2"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="240dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:progressDrawable="@drawable/custom_progress_bar" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/def"
+                        android:textColor="@color/pokemon_primary"
+                        android:textSize="@dimen/text_size_smaller"
+
+                        />
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/_000"
+                        android:textAlignment="textEnd"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/text_size_smaller"
+                        tools:ignore="RtlCompat" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar3"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="240dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:progressDrawable="@drawable/custom_progress_bar" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/satk"
+                        android:textColor="@color/pokemon_primary"
+                        android:textSize="@dimen/text_size_smaller"
+
+                        />
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/_000"
+                        android:textAlignment="textEnd"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/text_size_smaller"
+                        tools:ignore="RtlCompat" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar4"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="240dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:progressDrawable="@drawable/custom_progress_bar" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/sdef"
+                        android:textColor="@color/pokemon_primary"
+                        android:textSize="@dimen/text_size_smaller"
+
+                        />
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/_000"
+                        android:textAlignment="textEnd"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/text_size_smaller"
+                        tools:ignore="RtlCompat" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar5"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="240dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:progressDrawable="@drawable/custom_progress_bar" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/spd"
+                        android:textColor="@color/pokemon_primary"
+                        android:textSize="@dimen/text_size_smaller"
+
+                        />
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/_000"
+                        android:textAlignment="textEnd"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/text_size_smaller"
+                        tools:ignore="RtlCompat" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar6"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="240dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:progressDrawable="@drawable/custom_progress_bar" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/weaknesss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_large"
+                android:text="@string/weaknesses"
+                android:textColor="@color/pokemon_primary_dark"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contentLinearLayout" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvWeakNesses"
+                android:layout_width="match_parent"
+                android:layout_height="295dp"
+                android:layout_marginTop="@dimen/margin_top_min"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@+id/weaknesss" />
+
+            <TextView
+                android:id="@+id/tvAbilities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_large"
+                android:text="@string/abilities"
+                android:textColor="@color/pokemon_primary_dark"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvWeakNesses" />
+
+            <TextView
+                android:id="@+id/tvTorrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_left_normal"
+                android:layout_marginLeft="@dimen/margin_left_normal"
+                android:layout_marginTop="@dimen/margin_top_large"
+                android:text="@string/torrent"
+                android:textColor="@color/pokemon_primary"
+                android:textSize="@dimen/text_size_normal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAbilities" />
+
+            <TextView
+                android:id="@+id/tvContentTorrent"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginStart="@dimen/margin_left_normal"
+                android:layout_marginLeft="@dimen/margin_left_normal"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/powers_up_water_type_moves_when_the_pok_mon_is_in_trouble"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_normal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTorrent" />
+
+            <TextView
+                android:id="@+id/tvBreeding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_large"
+                android:text="@string/breeding"
+                android:textColor="@color/pokemon_primary_dark"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvContentTorrent" />
+
+            <LinearLayout
+                android:id="@+id/contentBreeding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xnormal"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_xnormal"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="9"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvBreeding"
+                tools:ignore="UselessLeaf">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/egg_group"
+                        android:textColor="#559edf"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_top_min"
+                        android:text="@string/monster"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/text_size_normal"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_top_xmin"
+                        android:text="@string/water_i"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/text_size_normal"
+
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="93dp"
+                    android:background="@color/text_hint"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/hatchtime"
+                        android:textColor="#559edf"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_top_min"
+                        android:text="@string/_5101_steps"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/text_size_normal"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_top_xmin"
+                        android:text="@string/_20_cycles"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/text_size_normal"
+
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="93dp"
+                    android:background="@color/text_hint"
+
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/gender"
+                        android:textColor="#559edf"
+                        android:textSize="@dimen/text_size_normal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPercent1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="@dimen/margin_top_xmin"
+                        android:layout_marginLeft="@dimen/margin_top_xmin"
+                        android:layout_marginTop="@dimen/margin_top_min"
+                        android:text="@string/_12_5"
+                        android:textColor="#ce71e1"
+                        android:textSize="@dimen/text_size_normal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="@dimen/margin_top_xmin"
+                        android:layout_marginLeft="@dimen/margin_top_xmin"
+                        android:layout_marginTop="@dimen/margin_top_xmin"
+                        android:text="@string/_85_5"
+                        android:textColor="@color/pokemon_primary"
+                        android:textSize="@dimen/text_size_normal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPercent1" />
+
+                    <ImageView
+                        android:layout_width="@dimen/size_icon_weakness_width"
+                        android:layout_height="@dimen/size_icon_weakness_height"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="@dimen/margin_top_min"
+                        android:src="@drawable/ic_gender"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/tvPercent1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8"
+                        tools:ignore="ContentDescription" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvCapture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_large"
+                android:text="@string/capture"
+                android:textColor="@color/pokemon_primary_dark"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contentBreeding"
+
+                />
+
+            <LinearLayout
+                android:id="@+id/contentCapture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xnormal"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_xnormal"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="9"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCapture"
+                tools:ignore="UselessLeaf">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/habitat"
+                        android:textColor="#559edf"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_xxnormal"
+                        android:text="@string/waters_edge"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/text_size_name"
+
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="83dp"
+                    android:background="@color/text_hint"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/generation"
+                        android:textColor="#559edf"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_xxnormal"
+                        android:text="@string/generation_1"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/text_size_name"
+
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="83dp"
+                    android:background="@color/text_hint"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/capture_rate"
+                        android:textColor="#559edf"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_xxnormal"
+                        android:text="@string/_45"
+                        android:textColor="@color/pokemon_primary"
+                        android:textSize="@dimen/text_size_name"
+
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvSprites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_large"
+                android:text="@string/sprites"
+                android:textColor="@color/pokemon_primary_dark"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contentCapture"
+
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="@dimen/margin_xxnormal"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="26dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSprites"
+                tools:ignore="DisableBaselineAlignment,UselessLeaf">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables,UselessParent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/normal"
+                        android:textColor="@color/dark_sky_blue"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/pokedex"
+
+                        tools:ignore="ContentDescription" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables,UselessParent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/shiny"
+                        android:textColor="@color/dark_sky_blue"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/pokedex"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
