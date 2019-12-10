@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_screen"
-    tools:context=".screen.movie.detail.DetailSkillPokemonActivity">
+    tools:context=".screen.movie.detail.DetailMoviePokemonActivity">
 
     <ImageButton
         android:id="@+id/imbBack"

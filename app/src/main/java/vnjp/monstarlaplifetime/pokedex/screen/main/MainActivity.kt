@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.screen.items.ItemsPokemonFragment
 import vnjp.monstarlaplifetime.pokedex.screen.listpokemon.ListPokemonFragment
-import vnjp.monstarlaplifetime.pokedex.screen.movie.ListSkillPokemonFragment
+import vnjp.monstarlaplifetime.pokedex.screen.movie.ListMovielPokemonFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -48,14 +48,14 @@ class MainActivity : AppCompatActivity() {
                 tvTitle?.text = "Pokemon"
                 val fragment = ListPokemonFragment()
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.frLayout, fragment, fragment.javaClass.simpleName)
+                    .add(R.id.frLayout, fragment, fragment.javaClass.simpleName)
                     .commit()
                 return true
             }
 
             R.id.action_disk -> {
                 tvTitle.text = "Movie"
-                val fragmentList = ListSkillPokemonFragment()
+                val fragmentList = ListMovielPokemonFragment()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.frLayout, fragmentList, fragmentList.javaClass.simpleName)
                     .commit()

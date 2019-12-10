@@ -10,15 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import vnjp.monstarlaplifetime.pokedex.R
-import vnjp.monstarlaplifetime.pokedex.data.models.Skill
+import vnjp.monstarlaplifetime.pokedex.data.models.Move
 
-class ListSkillAdapter(private val context: Context, private val itemClick: (Int) -> Unit) :
-    RecyclerView.Adapter<ListSkillAdapter.MyViewHolder>() {
+class ListMovieAdapter(private val context: Context, private val itemClick: (Int) -> Unit) :
+    RecyclerView.Adapter<ListMovieAdapter.MyViewHolder>() {
 
-    private var listSkill: List<Skill> = emptyList()
+    private var listSkill: List<Move> = emptyList()
+    private val pos: Int? = null
 
 
-    fun setListSkill(list: List<Skill>) {
+    fun setListSkill(list: List<Move>) {
         listSkill = list
         notifyDataSetChanged()
     }
@@ -26,7 +27,7 @@ class ListSkillAdapter(private val context: Context, private val itemClick: (Int
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ListSkillAdapter.MyViewHolder {
+    ): ListMovieAdapter.MyViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_skill_pokemon, parent, false)
 
@@ -38,15 +39,16 @@ class ListSkillAdapter(private val context: Context, private val itemClick: (Int
         return listSkill.size
     }
 
-    override fun onBindViewHolder(holder: ListSkillAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListMovieAdapter.MyViewHolder, position: Int) {
         val skill = listSkill[position]
         holder.bind(skill)
     }
 
-    fun getPositionSkill(position: Int): Skill {
+    fun getPositionSkill(position: Int): Move {
         return listSkill[position]
 
     }
+
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvNameSkill: TextView = itemView.findViewById(R.id.tvSkillPokemon)
@@ -58,15 +60,15 @@ class ListSkillAdapter(private val context: Context, private val itemClick: (Int
             }
         }
 
-        fun bind(skill: Skill) {
+        fun bind(skill: Move) {
             Glide.with(context)
-                .load(Uri.parse(skill.imageIconSkill))
+                .load(Uri.parse(skill.type))
                 .placeholder(R.drawable.ic_types_dragon)
                 .override(40, 40)
                 //.error(R.mipmap.ic_launcher_round)
                 .centerCrop()
                 .into(imageIconSkill)
-            tvNameSkill.text = skill.nameSkill
+            tvNameSkill.text = skill.name
         }
 
 

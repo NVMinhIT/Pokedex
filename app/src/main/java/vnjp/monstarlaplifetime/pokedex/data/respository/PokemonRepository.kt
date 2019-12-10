@@ -1,11 +1,9 @@
 package vnjp.monstarlaplifetime.pokedex.data.respository
 
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Job
-import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
+import vnjp.monstarlaplifetime.pokedex.data.api.OperationCallback
 
 interface PokemonRepository {
-    suspend fun getAllPokemonAsync(): Deferred<List<Pokemon>>
-
-    suspend fun addPokemon(pokemon: Pokemon): Job
+    fun getAllPokemons(callback: OperationCallback)
+    fun getAllMoviePokemon(callback: OperationCallback)
+    fun cancel()
 }
