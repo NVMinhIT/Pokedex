@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
+import vnjp.monstarlaplifetime.pokedex.data.response.PokemonTypes
 
 class ListPokemonAdapter(private val context: Context, private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<ListPokemonAdapter.MyViewHolder>() {
@@ -53,6 +54,8 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
         private val imageView: ImageView = itemView.findViewById(R.id.imgPokemon);
         private val tvTitle: TextView = itemView.findViewById(R.id.tvNamePokemon);
         private val tvCode: TextView = itemView.findViewById(R.id.tvCodePokemon);
+        private val imageIconType1: ImageView = itemView.findViewById(R.id.imgView1)
+        private val imageIconType2: ImageView = itemView.findViewById(R.id.imgView2)
 
         init {
             itemView.setOnClickListener {
@@ -61,19 +64,45 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
             }
         }
 
+
         fun bind(pokemon: Pokemon) {
-            Glide.with(context)
-                .load(Uri.parse(pokemon.pokemonImage))
-                .placeholder(R.drawable.pokemon1)
-                .override(50, 50)
-                //.error(R.mipmap.ic_launcher_round)
+            Picasso.get()
+                .load(Uri.parse(pokemon.image))
+                .resize(50, 50)
+                .centerCrop()
                 .into(imageView)
 
-            tvTitle.text = pokemon.pokemonName
-            tvCode.text = pokemon.pokemonId
+
+            tvTitle.text = pokemon.name
+            tvCode.text = pokemon.id
             this.itemView.setOnLongClickListener {
                 longClickItemPokemonListener?.onLongClickItemCategory(pokemon)
                 true
+            }
+            val enumPokemonType = PokemonTypes.FIRE
+            when (enumPokemonType) {
+
+                PokemonTypes.FIRE -> {
+                    imageIconType1.setImageResource(R.drawable.ic_types_fire)
+                }
+                PokemonTypes.FLYING -> {
+                    imageIconType1.setImageResource(R.drawable.ic_types_flying)
+                }
+                PokemonTypes.GRASS -> {
+                    imageIconType1.setImageResource(R.drawable.ic_types_grass)
+
+                }
+
+                PokemonTypes.POISON -> {
+                    imageIconType1.setImageResource(R.drawable.ic_types_poison)
+
+                }
+
+                PokemonTypes.WATER -> {
+                    imageIconType1.setImageResource(R.drawable.ic_water)
+                }
+
+
             }
 
         }

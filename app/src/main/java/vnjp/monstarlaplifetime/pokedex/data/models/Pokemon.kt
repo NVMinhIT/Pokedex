@@ -1,16 +1,24 @@
 package vnjp.monstarlaplifetime.pokedex.data.models
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Pokemon(
-    @SerializedName("id")
-    val pokemonId: String? = null,
-    @SerializedName("name")
-    val pokemonName: String? = null,
-    @SerializedName("image")
-    val pokemonImage: String? = null,
+class Pokemon {
     @SerializedName("description")
-    val description: String? = null,
+    @Expose
+    var description: String? = null
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+    @SerializedName("image")
+    @Expose
+    var image: String? = null
+    @SerializedName("name")
+    @Expose
+    var name: String? = null
     @SerializedName("pokemonTypes")
-    val pokemonTypes: String? = null
-)
+    @Expose
+    var pokemonTypes: List<String>? = null
+
+}
+

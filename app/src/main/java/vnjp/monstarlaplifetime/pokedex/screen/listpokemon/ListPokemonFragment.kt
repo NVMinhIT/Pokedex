@@ -2,26 +2,25 @@ package vnjp.monstarlaplifetime.pokedex.screen.listpokemon
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
+import com.emedinaa.kotlinmvvm.di.Injection
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
 import vnjp.monstarlaplifetime.pokedex.screen.detail.DetailPokemonActivity
 import vnjp.monstarlaplifetime.pokedex.screen.dialog.WeakNessPokemonDialogFragment
-import vnjp.monstarlaplifetime.pokedex.utils.Navigator
-import java.io.IOException
 
 class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategoryListener {
 
-
     private lateinit var listPokemonAdapter: ListPokemonAdapter
-    private var navigator: Navigator? = null
+    private lateinit var viewModel: ListPokemonViewModel
+    var arr = arrayListOf<Pokemon>()
 
     companion object {
         const val BUNDLE_STUDENT_ID = "BUNDLE_STUDENT_ID"
@@ -31,7 +30,6 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         return ListPokemonFragment()
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,10 +37,20 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_list_pokemon, container, false)
         initView(view)
-        navigator = Navigator()
+        viewModel = ViewModelProviders.of(this, ListPokemonFactory(Injection.providerRepository()))
+            .get(ListPokemonViewModel::class.java)
         initEvent()
-
+        initViewModel()
         return view.rootView
+    }
+
+    private fun initViewModel() {
+        viewModel.loadPokemon()
+        viewModel.pokemons.observe(this, Observer {
+            listPokemonAdapter.setList(it)
+        })
+
+
     }
 
     private fun initEvent() {
@@ -50,33 +58,19 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     }
 
     private fun initView(view: View) {
-        val gson = Gson()
-        val model = gson.fromJson(loadJSONFromAssets(), Pokemon::class.java)
 
-        Log.d("Name not found", "" + model)
-        val list: List<Pokemon> = listOf(
-            Pokemon("#001", "PokemonA", "", "", ""),
-            Pokemon("#002", "PokemonB", "", "", ""),
-            Pokemon("#003", "PokemonC", "", "", ""),
-            Pokemon("#004", "PokemonD", "", "", ""),
-            Pokemon("#005", "PokemonE", "", "", ""),
-            Pokemon("#006", "PokemonF", "", "", ""),
-            Pokemon("#007", "PokemonG", "", "", ""),
-            Pokemon("#008", "PokemonH", "", "", ""),
-            Pokemon("#009", "PokemonY", "", "", "")
-        )
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvListPokemon)
         listPokemonAdapter = ListPokemonAdapter(this.requireActivity()) {
             val intent = Intent(context, DetailPokemonActivity::class.java)
-            intent.putExtra(BUNDLE_STUDENT_ID, listPokemonAdapter.getPosition(it).pokemonId)
+            intent.putExtra(BUNDLE_STUDENT_ID, listPokemonAdapter.getPosition(it).id)
             startActivity(intent)
 
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = listPokemonAdapter
         listPokemonAdapter.setLongClickItemCategoryListener(this)
-        listPokemonAdapter.setList(list)
+
 
     }
 
@@ -84,23 +78,6 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         val fragment =
             WeakNessPokemonDialogFragment()
         fragment.show(childFragmentManager, fragment.javaClass.simpleName)
-    }
-
-    fun loadJSONFromAssets(): String? {
-        var json: String? = null
-        try {
-            val inputStream = context!!.assets.open("tb_pokemon.json")
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-
-            json = String(buffer, Charsets.UTF_8)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        return json
     }
 
 }
