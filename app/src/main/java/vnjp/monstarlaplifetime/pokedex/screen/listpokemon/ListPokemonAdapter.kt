@@ -1,17 +1,21 @@
 package vnjp.monstarlaplifetime.pokedex.screen.listpokemon
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import vnjp.monstarlaplifetime.pokedex.MyApp
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
-import vnjp.monstarlaplifetime.pokedex.data.response.PokemonTypes
+import vnjp.monstarlaplifetime.pokedex.utils.CommonF
 
 class ListPokemonAdapter(private val context: Context, private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<ListPokemonAdapter.MyViewHolder>() {
@@ -46,24 +50,20 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
 
     override fun onBindViewHolder(holder: ListPokemonAdapter.MyViewHolder, position: Int) {
         val current = listPokemon[position]
-
         holder.bind(current)
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var firstTime = true
         private val imageView: ImageView = itemView.findViewById(R.id.imgPokemon);
         private val tvTitle: TextView = itemView.findViewById(R.id.tvNamePokemon);
         private val tvCode: TextView = itemView.findViewById(R.id.tvCodePokemon);
-        private val imageIconType1: ImageView = itemView.findViewById(R.id.imgView1)
-        private val imageIconType2: ImageView = itemView.findViewById(R.id.imgView2)
-
+        private val layout: LinearLayout = itemView.findViewById(R.id.contentLinearLayoutIcon)
         init {
             itemView.setOnClickListener {
                 itemClick(adapterPosition)
-
             }
         }
-
 
         fun bind(pokemon: Pokemon) {
             Picasso.get()
@@ -72,42 +72,34 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
                 .centerCrop()
                 .into(imageView)
 
-
             tvTitle.text = pokemon.name
             tvCode.text = pokemon.id
             this.itemView.setOnLongClickListener {
                 longClickItemPokemonListener?.onLongClickItemCategory(pokemon)
                 true
             }
-            val enumPokemonType = PokemonTypes.FIRE
-            when (enumPokemonType) {
 
-                PokemonTypes.FIRE -> {
-                    imageIconType1.setImageResource(R.drawable.ic_types_fire)
-                }
-                PokemonTypes.FLYING -> {
-                    imageIconType1.setImageResource(R.drawable.ic_types_flying)
-                }
-                PokemonTypes.GRASS -> {
-                    imageIconType1.setImageResource(R.drawable.ic_types_grass)
-
-                }
-
-                PokemonTypes.POISON -> {
-                    imageIconType1.setImageResource(R.drawable.ic_types_poison)
-
+            if (firstTime){
+                firstTime = false
+                val lsDrawabl: ArrayList<Drawable> = ArrayList()
+                pokemon.pokemonTypes?.let {
+                    for (stringType in it) {
+                        MyApp.pokemonTypeMapping.get(stringType)?.let { idDrawAble ->
+                            ContextCompat.getDrawable(context, idDrawAble)?.let { icon ->
+                                lsDrawabl.add(icon)
+                            }
+                        }
+                    }
                 }
 
-                PokemonTypes.WATER -> {
-                    imageIconType1.setImageResource(R.drawable.ic_water)
+                for (i in lsDrawabl) {
+                    val img = ImageView(context)
+                    img.setLayoutParams(LinearLayout.LayoutParams(CommonF.dpToPx(40), CommonF.dpToPx(40)))
+                    img.setImageDrawable(i)
+                    layout.addView(img)
                 }
-
-
             }
-
         }
-
-
     }
 
     interface ILongClickItemCategoryListener {

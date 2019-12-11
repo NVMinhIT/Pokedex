@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import vnjp.monstarlaplifetime.pokedex.R
+import vnjp.monstarlaplifetime.pokedex.data.models.Moves
 import vnjp.monstarlaplifetime.pokedex.screen.detail.detailpokemon.DetailPokemonActivity
 
 class MovesFragment : Fragment() {
     private lateinit var movieAdapter: MovesAdapter
+    private var listMoves: List<Moves> = emptyList()
 
     private val mReceiver2: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -43,7 +44,8 @@ class MovesFragment : Fragment() {
         activity?.let {
             if (activity is DetailPokemonActivity) {
                 (activity as DetailPokemonActivity).viewModel.pokemonDetail.observe(this, Observer {
-                    Log.d("MINH", it.toString())
+                    it.moves?.let {
+                            it1 -> movieAdapter.setListItemMovieType(it1) }
                 })
             }
         }
@@ -61,30 +63,11 @@ class MovesFragment : Fragment() {
 
     private fun initView(view: View) {
 
-//        val list: List<Moves> = listOf(
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", ""),
-//            ItemMovieType("Pokemon", "level12", "")
-//
-//
-//        )
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvListTypeMovie)
         movieAdapter = MovesAdapter(this.requireContext())
         recyclerView?.layoutManager = LinearLayoutManager(context)
         recyclerView?.adapter = movieAdapter
-        //movieAdapter.setListItemMovieType(list)
+
 
     }
 }
