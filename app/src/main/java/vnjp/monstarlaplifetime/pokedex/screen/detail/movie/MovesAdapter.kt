@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Moves
 
@@ -60,10 +60,9 @@ class MovesAdapter(private val context: Context) :
 //        }
 
         fun bind(itemMovieType: Moves) {
-            Glide.with(context)
+            Picasso.get()
                 .load(Uri.parse(itemMovieType.type))
-                .placeholder(R.drawable.ic_types_fight)
-                .override(40, 40)
+                .resize(40, 40)
                 //.error(R.mipmap.ic_launcher_round)
                 .centerCrop()
                 .into(imgIconMovie)
