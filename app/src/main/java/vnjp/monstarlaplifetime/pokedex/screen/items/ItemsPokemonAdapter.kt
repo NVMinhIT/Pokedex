@@ -10,16 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import vnjp.monstarlaplifetime.pokedex.R
-import vnjp.monstarlaplifetime.pokedex.data.models.ItemsPokemon
+import vnjp.monstarlaplifetime.pokedex.data.models.Items
 
 
 class ItemsPokemonAdapter(private val context: Context, private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<ItemsPokemonAdapter.MyViewHolder>() {
 
-    private var listItem: List<ItemsPokemon> = emptyList()
+    private var listItem: List<Items> = emptyList()
 
 
-    fun setListItems(list: List<ItemsPokemon>) {
+    fun setListItems(list: List<Items>) {
         listItem = list
         notifyDataSetChanged()
     }
@@ -45,7 +45,7 @@ class ItemsPokemonAdapter(private val context: Context, private val itemClick: (
         holder.bind(items)
     }
 
-    fun getPositionItems(position: Int): ItemsPokemon {
+    fun getPositionItems(position: Int): Items {
         return listItem[position]
 
     }
@@ -62,14 +62,16 @@ class ItemsPokemonAdapter(private val context: Context, private val itemClick: (
             }
         }
 
-        fun bind(itemsPokemon: ItemsPokemon) {
+        fun bind(itemsPokemon: Items) {
             Glide.with(context)
-                .load(Uri.parse(itemsPokemon.imageIconItem))
-                .placeholder(R.drawable.ball)
+                .load(Uri.parse(itemsPokemon.image))
+                //.placeholder(R.drawable.ball)
                 .override(40, 40)
                 //.error(R.mipmap.ic_launcher_round)
                 .centerCrop()
                 .into(imageIconItem)
+            tvNameItem.text = itemsPokemon.name
+            tvPriceItem.text = itemsPokemon.price.toString()
 
         }
 

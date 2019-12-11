@@ -61,6 +61,7 @@ If used in a trainer battle, nothing happens and the ball is lost.</string>
     <string name="lv_16">Lv.16</string>
     <string name="lv_32">Lv.32</string>
     <string name="mega_stone">Mega Stone</string>
+    <string name="level">Level</string>
 
 
 </resources>

@@ -1,18 +1,16 @@
 package vnjp.monstarlaplifetime.pokedex.data.response
 
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
+import vnjp.monstarlaplifetime.pokedex.data.models.Items
 
-import vnjp.monstarlaplifetime.pokedex.data.models.Move
 
-
-class MoviePokemonResponse {
+class ItemsResponse {
     @SerializedName("total")
     @Expose
     var total: Int? = null
-    @SerializedName("moves")
+    @SerializedName("items")
     @Expose
-    var moves: List<Move?>? = null
+    var items: List<Items>? = null
 
 }

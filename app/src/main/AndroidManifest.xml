@@ -17,7 +17,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".screen.items.detail.DetailItemsActivity"></activity>
         <activity android:name=".screen.movie.detail.DetailMoviePokemonActivity" />
-        <activity android:name=".screen.detail.DetailPokemonActivity" />
+        <activity android:name=".screen.detail.detailpokemon.DetailPokemonActivity" />
         <activity android:name=".screen.flash.SplashActivity">
 
         </activity>

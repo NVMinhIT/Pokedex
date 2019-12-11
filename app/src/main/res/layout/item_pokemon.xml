@@ -15,6 +15,7 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_smaller"
         android:layout_marginBottom="@dimen/margin_normal_small"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"

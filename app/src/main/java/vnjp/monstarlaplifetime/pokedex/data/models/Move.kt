@@ -3,24 +3,25 @@ package vnjp.monstarlaplifetime.pokedex.data.models
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Move {
+data class Move(
     @SerializedName("name")
     @Expose
-    var name: String? = null
+    var name: String,
     @SerializedName("type")
     @Expose
-    var type: String? = null
+    var type: String,
     @SerializedName("effects")
     @Expose
-    var effects: String? = null
+    var effects: String,
     @SerializedName("power")
     @Expose
-    var power: Int? = null
+    var power: Int,
     @SerializedName("accuracy")
     @Expose
-    var accuracy: Int? = null
+    var accuracy: Int,
     @SerializedName("pp")
     @Expose
-    var pp: Int? = null
+    var pp: Int
+)
 
-}
+

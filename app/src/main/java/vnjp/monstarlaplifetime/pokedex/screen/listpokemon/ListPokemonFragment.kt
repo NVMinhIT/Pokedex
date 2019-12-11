@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.emedinaa.kotlinmvvm.di.Injection
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
-import vnjp.monstarlaplifetime.pokedex.screen.detail.DetailPokemonActivity
+import vnjp.monstarlaplifetime.pokedex.screen.detail.detailpokemon.DetailPokemonActivity
 import vnjp.monstarlaplifetime.pokedex.screen.dialog.WeakNessPokemonDialogFragment
 
 class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategoryListener {
@@ -23,7 +23,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     var arr = arrayListOf<Pokemon>()
 
     companion object {
-        const val BUNDLE_STUDENT_ID = "BUNDLE_STUDENT_ID"
+        const val BUNDLE_POKEMON_ID = "BUNDLE_POKEMON_ID"
     }
 
     fun newInstance(): ListPokemonFragment {
@@ -63,7 +63,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvListPokemon)
         listPokemonAdapter = ListPokemonAdapter(this.requireActivity()) {
             val intent = Intent(context, DetailPokemonActivity::class.java)
-            intent.putExtra(BUNDLE_STUDENT_ID, listPokemonAdapter.getPosition(it).id)
+            intent.putExtra(BUNDLE_POKEMON_ID, listPokemonAdapter.getPosition(it).id)
             startActivity(intent)
 
         }
