@@ -26,10 +26,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_xnormal"
         android:layout_marginLeft="@dimen/margin_xnormal"
-        android:text="@string/bubble"
+        android:text="@string/level"
         android:textColor="@color/text_hint"
         android:textSize="@dimen/text_size_normal"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameMoviePokemon" />
+
+    <TextView
+        android:id="@+id/tvNumberLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small_xxmin"
+        android:layout_marginLeft="@dimen/margin_small_xxmin"
+        android:text="@string/level"
+        android:textColor="@color/text_hint"
+        android:textSize="@dimen/text_size_normal"
+        app:layout_constraintLeft_toRightOf="@+id/tvLevelDetail"
         app:layout_constraintTop_toBottomOf="@+id/tvNameMoviePokemon" />
 
     <ImageView

@@ -16,7 +16,7 @@
     <dimen name="icons_description_width">36dp</dimen>
     <!--text size-->
     <dimen name="text_size_name">19sp</dimen>
-    <dimen name="text_size_xlarge">40sp</dimen>
+    <dimen name="text_size_xlarge">32sp</dimen>
     <dimen name="text_size_large">20sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_normal">15sp</dimen>
@@ -46,6 +46,8 @@
     <dimen name="margin_left_big">46dp</dimen>
     <dimen name="margin_smaller">13dp</dimen>
     <dimen name="margin_small_min">8dp</dimen>
+    <dimen name="margin_small_xmin">6dp</dimen>
+    <dimen name="margin_small_xxmin">3dp</dimen>
     <dimen name="margin_normal">20dp</dimen>
     <dimen name="margin_top_min">16dp</dimen>
     <dimen name="margin_top_xmin">6dp</dimen>

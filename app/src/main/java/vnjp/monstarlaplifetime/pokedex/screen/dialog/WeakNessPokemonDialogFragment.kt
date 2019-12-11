@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import vnjp.monstarlaplifetime.pokedex.R
-import vnjp.monstarlaplifetime.pokedex.data.models.WeakNesses
+import vnjp.monstarlaplifetime.pokedex.data.models.Weaknesses
 import java.util.*
 
 class WeakNessPokemonDialogFragment : DialogFragment() {
@@ -42,25 +42,25 @@ class WeakNessPokemonDialogFragment : DialogFragment() {
 
     private fun initView(view: View) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvListItemSupport)
-        val list: List<WeakNesses> = listOf(
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x"),
-            WeakNesses("", "1x")
+        val list: List<Weaknesses> = listOf(
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x"),
+            Weaknesses("", "1x")
         )
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = GridLayoutManager(context, 3)

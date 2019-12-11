@@ -43,6 +43,7 @@ class ListMovielPokemonFragment : Fragment() {
         viewmodel.loadMovie()
         viewmodel.movies.observe(this, Observer {
             listSkillAdapter.setListSkill(it)
+
         })
 
     }
@@ -55,7 +56,7 @@ class ListMovielPokemonFragment : Fragment() {
             intent.putExtra(BUNDLE_NAME_MOVIE, listSkillAdapter.getPositionSkill(it).name)
             startActivity(intent)
         }
-        recyclerView?.layoutManager = LinearLayoutManager(context)
+        recyclerView?.layoutManager = LinearLayoutManager(context) as RecyclerView.LayoutManager?
         recyclerView?.adapter = listSkillAdapter
 
 

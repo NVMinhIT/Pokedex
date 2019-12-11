@@ -1,48 +1,98 @@
-package vnjp.monstarlaplifetime.pokedex.screen.detail
+package vnjp.monstarlaplifetime.pokedex.screen.detail.detailpokemon
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.emedinaa.kotlinmvvm.di.Injection
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_pokemon.*
 import vnjp.monstarlaplifetime.pokedex.R
+import vnjp.monstarlaplifetime.pokedex.data.models.Moves
+import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
 import vnjp.monstarlaplifetime.pokedex.screen.detail.evolution.EvolutionsFragment
-import vnjp.monstarlaplifetime.pokedex.screen.detail.movie.MovieFragment
+import vnjp.monstarlaplifetime.pokedex.screen.detail.movie.MovesFragment
 import vnjp.monstarlaplifetime.pokedex.screen.detail.start.StartFragment
+import vnjp.monstarlaplifetime.pokedex.screen.listpokemon.ListPokemonFragment
 
 @Suppress("DEPRECATION")
 class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
+     lateinit var viewModel: DetailsPokemonViewModel
+    private var idPokemon: String? = null
+    private var pokemon: Pokemon? = null
+    private var listMoves: List<Moves> = emptyList()
 
     companion object {
         var selectedId: Int = 10
+        const val ACTION_LIST_MOVES = "ACTION_LIST_MOVES"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.MyPokemonTheme);
-        setContentView(R.layout.activity_detail_pokemon1)
+        setContentView(R.layout.activity_detail_pokemon)
+        intent.extras?.let { bundle ->
+            idPokemon = bundle.getString(ListPokemonFragment.BUNDLE_POKEMON_ID)
+
+        }
+        viewModel =
+            ViewModelProviders.of(this, DetailsPokemonFactory(Injection.providerRepository()))
+                .get(DetailsPokemonViewModel::class.java)
+        initViewModel()
         initView()
+        initEvent()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-//        val actionBar = supportActionBar
-//        actionBar!!.title = "Squirtle"
-        //actionBar.setDisplayShowHomeEnabled(true)
-
-
     }
 
+    private fun initViewModel() {
+        idPokemon?.let {
+            viewModel.loadDetailPokemon(it)
+        }
+        viewModel.pokemonDetail.observe(this, Observer {
+            pokemon = it.pokemon
+            listMoves = it.moves!!
+            setData()
+            val intent = Intent(ACTION_LIST_MOVES)
+            val bundle = Bundle().apply {
+                putParcelableArrayList("LIST", ArrayList<Parcelable>(listMoves))
+            }
+            intent.putExtras(bundle)
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+        })
+    }
+
+    private fun setData() {
+        tvNamePokemon.text = pokemon?.name
+        tv_description_pokemon.text = pokemon?.description
+
+        Picasso.get()
+            .load(Uri.parse(pokemon?.image))
+            .resize(170, 170)
+            .centerCrop()
+            .into(img_Pokemon)
+    }
+
+    private fun initEvent() {
+        btStart.setOnClickListener(this)
+        btEvolution.setOnClickListener(this)
+        imbBack.setOnClickListener(this)
+        btMoves.setOnClickListener(this)
+    }
 
     private fun initView() {
-        selectedId = R.id.btStart
-//        val imbBack = findViewById<ImageButton>(R.id.imbBackButton)
         val btStart = findViewById<Button>(R.id.btStart)
         val btEvolution = findViewById<Button>(R.id.btEvolution)
         val btMoves = findViewById<Button>(R.id.btMoves)
-        //imbBack.setOnClickListener(this)
-        btStart.setOnClickListener(this)
-        btEvolution.setOnClickListener(this)
-        btMoves.setOnClickListener(this)
+        val imbBack = findViewById<ImageButton>(R.id.imbBack)
+
     }
 
     @SuppressLint("ResourceType")
@@ -51,7 +101,7 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
         when (p0?.id) {
 
             R.id.btStart -> {
-                selectedId
+
                 btStart.setBackgroundResource(R.drawable.bg_button_active)
                 btStart.setTextColor(resources.getColor(R.color.white_view))
                 btEvolution.setBackgroundResource(R.drawable.bg_button_noactive)
@@ -91,7 +141,7 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
                 btEvolution.setTextColor(resources.getColor(R.color.dark_sky_blue))
                 btStart.setBackgroundResource(R.drawable.bg_button_noactive)
                 btStart.setTextColor(resources.getColor(R.color.dark_sky_blue))
-                val fragmentMovie = MovieFragment()
+                val fragmentMovie = MovesFragment()
                 supportFragmentManager.beginTransaction()
                     .replace(
                         R.id.content_frame_layout,

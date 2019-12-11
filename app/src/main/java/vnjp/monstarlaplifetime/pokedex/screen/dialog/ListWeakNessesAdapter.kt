@@ -10,13 +10,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import vnjp.monstarlaplifetime.pokedex.R
-import vnjp.monstarlaplifetime.pokedex.data.models.WeakNesses
+import vnjp.monstarlaplifetime.pokedex.data.models.Weakness
+import vnjp.monstarlaplifetime.pokedex.data.models.Weaknesses
 
 class ListWeakNessesAdapter(
     private val context: Context
 ) : RecyclerView.Adapter<ListWeakNessesAdapter.MyViewHolder>() {
-    private var listWeakNesses: List<WeakNesses> = emptyList()
-    fun setList(list: List<WeakNesses>) {
+    private var listWeakNesses: List<Weaknesses> = emptyList()
+    fun setList(list: List<Weaknesses>) {
         listWeakNesses = list
         notifyDataSetChanged()
 
@@ -46,7 +47,7 @@ class ListWeakNessesAdapter(
 
         private var imageView: ImageView = itemView.findViewById(R.id.imgIconWeakNess)
         private var tvIndex: TextView = itemView.findViewById(R.id.tvIndexWeakNess)
-        fun bind(weakNesses: WeakNesses) {
+        fun bind(weakNesses: Weaknesses) {
             Glide.with(context)
                 .load(Uri.parse(weakNesses.imageWeakNesses))
                 .override(36, 36)
