@@ -59,11 +59,10 @@
 
                     <ImageView
                         android:id="@+id/img_Water"
-                        android:layout_width="160dp"
-                        android:layout_height="50dp"
+                        android:layout_width="130dp"
+                        android:layout_height="40dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginTop="6dp"
                         android:background="@null"
                         android:src="@drawable/ic_water"
                         tools:ignore="ContentDescription" />
@@ -97,7 +96,7 @@
                     android:layout_below="@+id/contentRelativeLayout"
                     android:layout_marginStart="@dimen/margin_normal"
                     android:layout_marginLeft="@dimen/margin_normal"
-                    android:layout_marginTop="@dimen/margin_xnormal"
+                    android:layout_marginTop="@dimen/margin_normal"
                     android:layout_marginEnd="@dimen/margin_normal"
                     android:gravity="center"
                     android:text="@string/content_pokemon"
