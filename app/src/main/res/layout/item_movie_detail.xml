@@ -44,17 +44,30 @@
         app:layout_constraintLeft_toRightOf="@+id/tvLevelDetail"
         app:layout_constraintTop_toBottomOf="@+id/tvNameMoviePokemon" />
 
-    <ImageView
-        android:id="@+id/imgIconMovie"
-        android:layout_width="@dimen/image_icon_button_width"
-        android:layout_height="@dimen/image_icon_button_height"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginRight="@dimen/margin_small"
-        android:scaleType="centerCrop"
+    <LinearLayout
+        android:id="@+id/contentLinearLayoutIcon"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="end"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tvNumberLevel"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        tools:ignore="UselessLeaf" />
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imgIconMovie"-->
+    <!--        android:layout_width="@dimen/image_icon_button_width"-->
+    <!--        android:layout_height="@dimen/image_icon_button_height"-->
+    <!--        android:layout_marginEnd="@dimen/margin_small"-->
+    <!--        android:layout_marginRight="@dimen/margin_small"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        tools:ignore="ContentDescription" />-->
 
     <View
         android:layout_width="match_parent"

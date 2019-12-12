@@ -16,7 +16,7 @@
         tools:ignore="UselessLeaf">
 
         <ImageView
-            android:id="@+id/imgViewPokemon1"
+            android:id="@+id/imgViewPokemon"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_alignParentStart="true"
@@ -29,9 +29,11 @@
 
         <TextView
             android:id="@+id/tvNamePokemon"
-            android:layout_width="65dp"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/text"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imgViewPokemon1"
+            android:layout_below="@+id/imgViewPokemon"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
@@ -50,6 +52,7 @@
             android:textColor="@color/dark_sky_blue"
             android:textSize="@dimen/text_size_normal" />
 
+
         <ImageView
             android:id="@+id/imgTo1"
             android:layout_width="wrap_content"
@@ -62,6 +65,7 @@
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_alignParentEnd="true"
+            android:id="@+id/imgViewPokemonEvolution"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/margin_left_big"
@@ -71,12 +75,14 @@
 
         <TextView
             android:id="@+id/tvEvolutionPokemon"
-            android:layout_width="65dp"
+            android:layout_width="wrap_content"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imgViewPokemon1"
+            android:layout_below="@+id/imgViewPokemon"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
+            android:textColor="@color/text"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="@dimen/margin_left_big"
             android:layout_marginRight="@dimen/margin_left_big"

@@ -1,20 +1,20 @@
 package vnjp.monstarlaplifetime.pokedex.screen.detail.detailpokemon
 
 import android.annotation.SuppressLint
-import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.emedinaa.kotlinmvvm.di.Injection
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_pokemon.*
+import vnjp.monstarlaplifetime.pokedex.MyApp
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Moves
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
@@ -25,8 +25,9 @@ import vnjp.monstarlaplifetime.pokedex.screen.listpokemon.ListPokemonFragment
 
 @Suppress("DEPRECATION")
 class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
-     lateinit var viewModel: DetailsPokemonViewModel
+    lateinit var viewModel: DetailsPokemonViewModel
     private var idPokemon: String? = null
+    private var typePokemon: String? = null
     private var pokemon: Pokemon? = null
     private var listMoves: List<Moves> = emptyList()
 
@@ -41,6 +42,7 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_detail_pokemon)
         intent.extras?.let { bundle ->
             idPokemon = bundle.getString(ListPokemonFragment.BUNDLE_POKEMON_ID)
+
 
         }
         viewModel =
@@ -60,24 +62,31 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
             pokemon = it.pokemon
             listMoves = it.moves!!
             setData()
-            val intent = Intent(ACTION_LIST_MOVES)
-            val bundle = Bundle().apply {
-                putParcelableArrayList("LIST", ArrayList<Parcelable>(listMoves))
-            }
-            intent.putExtras(bundle)
-            LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
         })
     }
 
     private fun setData() {
         tvNamePokemon.text = pokemon?.name
         tv_description_pokemon.text = pokemon?.description
-
         Picasso.get()
             .load(Uri.parse(pokemon?.image))
             .resize(170, 170)
             .centerCrop()
             .into(img_Pokemon)
+        //Log.d("MINH", pokemon?.pokemonTypes?.get(0))
+        val type = pokemon?.pokemonTypes?.get(0)
+        val lsDrawabl: ArrayList<Drawable> = ArrayList()
+        type.let {
+            MyApp.pokemonTypesMapping.get(type)?.let { idDrawAble ->
+                ContextCompat.getDrawable(applicationContext, idDrawAble)?.let { icon ->
+                    lsDrawabl.add(icon)
+                }
+            }
+        }
+        for (i in lsDrawabl) {
+            img_Water.setImageDrawable(i)
+
+        }
     }
 
     private fun initEvent() {
@@ -92,7 +101,6 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
         val btEvolution = findViewById<Button>(R.id.btEvolution)
         val btMoves = findViewById<Button>(R.id.btMoves)
         val imbBack = findViewById<ImageButton>(R.id.imbBack)
-
     }
 
     @SuppressLint("ResourceType")

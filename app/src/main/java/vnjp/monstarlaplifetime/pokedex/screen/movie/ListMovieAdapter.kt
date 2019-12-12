@@ -1,16 +1,19 @@
 package vnjp.monstarlaplifetime.pokedex.screen.movie
 
 import android.content.Context
-import android.net.Uri
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import vnjp.monstarlaplifetime.pokedex.MyApp
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Move
+import vnjp.monstarlaplifetime.pokedex.utils.CommonF
 
 class ListMovieAdapter(private val context: Context, private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<ListMovieAdapter.MyViewHolder>() {
@@ -18,6 +21,9 @@ class ListMovieAdapter(private val context: Context, private val itemClick: (Int
     private var listSkill: List<Move> = emptyList()
     private val pos: Int? = null
 
+    companion object {
+
+    }
 
     fun setListSkill(list: List<Move>) {
         listSkill = list
@@ -51,8 +57,11 @@ class ListMovieAdapter(private val context: Context, private val itemClick: (Int
 
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var isFirst = true
         private val tvNameSkill: TextView = itemView.findViewById(R.id.tvSkillPokemon)
-        private val imageIconSkill: ImageView = itemView.findViewById(R.id.imgIconSkill)
+        //private val imageIconSkill: ImageView = itemView.findViewById(R.id.imgIconSkill)
+        private val layout: LinearLayout = itemView.findViewById(R.id.contentLinearLayoutIcon)
+
 
         init {
             itemView.setOnClickListener {
@@ -61,14 +70,31 @@ class ListMovieAdapter(private val context: Context, private val itemClick: (Int
         }
 
         fun bind(skill: Move) {
-            Picasso.get()
-                .load(Uri.parse(skill.type))
-                //.placeholder(R.drawable.ic_types_dragon)
-                .resize(40, 40)
-                .error(R.mipmap.ic_launcher_round)
-                .centerCrop()
-                .into(imageIconSkill)
+
             tvNameSkill.text = skill.name
+            val lsDrawabl: ArrayList<Drawable> = ArrayList()
+            val type = skill.type
+            skill.type?.let {
+                MyApp.pokemonTypeMapping.get(type)?.let { idDrawAble ->
+                    ContextCompat.getDrawable(context, idDrawAble)?.let { icon ->
+                        lsDrawabl.add(icon)
+                    }
+                }
+            }
+            layout.removeAllViews()
+            for (i in lsDrawabl) {
+                val img = ImageView(context)
+                img.setLayoutParams(
+                    LinearLayout.LayoutParams(
+                        CommonF.dpToPx(40),
+                        CommonF.dpToPx(40)
+                    )
+                )
+                img.setImageDrawable(i)
+                layout.addView(img)
+            }
+
+
         }
 
 

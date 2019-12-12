@@ -2,6 +2,7 @@ package vnjp.monstarlaplifetime.pokedex.screen.listpokemon
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
 import vnjp.monstarlaplifetime.pokedex.screen.detail.detailpokemon.DetailPokemonActivity
 import vnjp.monstarlaplifetime.pokedex.screen.dialog.WeakNessPokemonDialogFragment
 
+
 class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategoryListener {
 
     private lateinit var listPokemonAdapter: ListPokemonAdapter
@@ -24,6 +26,8 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
 
     companion object {
         const val BUNDLE_POKEMON_ID = "BUNDLE_POKEMON_ID"
+        const val POKEMON_ID = "POKEMON_ID"
+        const val POKEMON_TYPE = "POKEMON_TYPE"
     }
 
     fun newInstance(): ListPokemonFragment {
@@ -75,9 +79,14 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     }
 
     override fun onLongClickItemCategory(pokemon: Pokemon?) {
-        val fragment =
-            WeakNessPokemonDialogFragment()
-        fragment.show(childFragmentManager, fragment.javaClass.simpleName)
+        val s = pokemon?.pokemonTypes?.get(0)
+        Log.d("MINH", "${s}")
+        val args = Bundle()
+        args.putString(POKEMON_ID, pokemon?.id)
+        args.putString(POKEMON_TYPE, s)
+        val newFragment = WeakNessPokemonDialogFragment()
+        newFragment.setArguments(args)
+        newFragment.show(childFragmentManager, newFragment.javaClass.simpleName)
     }
 
 }
