@@ -59,6 +59,7 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
         private val tvTitle: TextView = itemView.findViewById(R.id.tvNamePokemon);
         private val tvCode: TextView = itemView.findViewById(R.id.tvCodePokemon);
         private val layout: LinearLayout = itemView.findViewById(R.id.contentLinearLayoutIcon)
+
         init {
             itemView.setOnClickListener {
                 itemClick(adapterPosition)
@@ -79,26 +80,30 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
                 true
             }
 
-            if (firstTime){
-                firstTime = false
-                val lsDrawabl: ArrayList<Drawable> = ArrayList()
-                pokemon.pokemonTypes?.let {
-                    for (stringType in it) {
-                        MyApp.pokemonTypeMapping.get(stringType)?.let { idDrawAble ->
-                            ContextCompat.getDrawable(context, idDrawAble)?.let { icon ->
-                                lsDrawabl.add(icon)
-                            }
+            val lsDrawabl: ArrayList<Drawable> = ArrayList()
+            pokemon.pokemonTypes?.let {
+                for (stringType in it) {
+                    MyApp.pokemonTypeMapping.get(stringType)?.let { idDrawAble ->
+                        ContextCompat.getDrawable(context, idDrawAble)?.let { icon ->
+                            lsDrawabl.add(icon)
                         }
                     }
                 }
-
-                for (i in lsDrawabl) {
-                    val img = ImageView(context)
-                    img.setLayoutParams(LinearLayout.LayoutParams(CommonF.dpToPx(40), CommonF.dpToPx(40)))
-                    img.setImageDrawable(i)
-                    layout.addView(img)
-                }
             }
+
+            layout.removeAllViews()
+            for (i in lsDrawabl) {
+                val img = ImageView(context)
+                img.setLayoutParams(
+                    LinearLayout.LayoutParams(
+                        CommonF.dpToPx(40),
+                        CommonF.dpToPx(40)
+                    )
+                )
+                img.setImageDrawable(i)
+                layout.addView(img)
+            }
+
         }
     }
 

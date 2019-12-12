@@ -11,6 +11,7 @@ import vnjp.monstarlaplifetime.pokedex.data.api.ServiceRetrofit
 import vnjp.monstarlaplifetime.pokedex.data.models.Items
 import vnjp.monstarlaplifetime.pokedex.data.models.Move
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
+import vnjp.monstarlaplifetime.pokedex.data.models.Weakness
 import vnjp.monstarlaplifetime.pokedex.data.response.DetailPokemonResponse
 import vnjp.monstarlaplifetime.pokedex.data.response.ItemsResponse
 import vnjp.monstarlaplifetime.pokedex.data.response.MoviePokemonResponse
@@ -173,6 +174,33 @@ class PokemonRepositoryImpl : PokemonRepository {
             }
 
             override fun onFailure(call: Call<DetailPokemonResponse>, t: Throwable) {
+                callback.onError(t.message)
+            }
+        })
+    }
+
+    override fun getWeakNesses(type: String, callback: OperationCallback) {
+        val apiService: ApiService = ServiceRetrofit().getService()
+        apiService.getWeakNesses(type).enqueue(object : Callback<List<Weakness>> {
+            override fun onResponse(
+                call: Call<List<Weakness>>,
+                response: Response<List<Weakness>>
+            ) {
+                response.body()?.let {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(it)
+                    } else {
+                        callback.onError("No Response")
+                    }
+                }
+
+
+            }
+
+            override fun onFailure(
+                call: Call<List<Weakness>>,
+                t: Throwable
+            ) {
                 callback.onError(t.message)
             }
         })

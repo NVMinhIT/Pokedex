@@ -50,21 +50,51 @@
                     android:textSize="@dimen/text_big"
                     tools:ignore="NotSibling,SpUsage" />
 
-                <ImageView
-                    android:id="@+id/img_Water"
-                    android:layout_width="@dimen/width_image_small"
-                    android:layout_height="@dimen/height_image_smail"
+                <RelativeLayout
+                    android:id="@+id/contentRelativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/tvNamePokemon"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/water"
-                    tools:ignore="ContentDescription" />
+                    android:layout_marginTop="6dp">
+
+                    <ImageView
+                        android:id="@+id/img_Water"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="6dp"
+                        android:background="@null"
+                        android:src="@drawable/ic_water"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tvNameType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tools:ignore="SmallSp" />
+                </RelativeLayout>
+
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/img_Water"-->
+                <!--                    android:layout_width="@dimen/width_image_small"-->
+                <!--                    android:layout_height="@dimen/height_image_smail"-->
+                <!--                    android:layout_below="@+id/tvNamePokemon"-->
+                <!--                    android:layout_centerInParent="true"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    android:background="@drawable/water"-->
+                <!--                    tools:ignore="ContentDescription" />-->
 
                 <TextView
                     android:id="@+id/tv_description_pokemon"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_below="@+id/img_Water"
+                    android:layout_below="@+id/contentRelativeLayout"
                     android:layout_marginStart="@dimen/margin_normal"
                     android:layout_marginLeft="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_xnormal"

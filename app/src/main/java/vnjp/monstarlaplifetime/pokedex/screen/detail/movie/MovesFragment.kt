@@ -19,22 +19,6 @@ class MovesFragment : Fragment() {
     private lateinit var movieAdapter: MovesAdapter
     private var listMoves: List<Moves> = emptyList()
 
-    private val mReceiver2: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if (intent != null) {
-                if (intent.action != null) {
-                    if (intent.action == DetailPokemonActivity.ACTION_LIST_MOVES) {
-                        try {
-
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     fun newInstance(): MovesFragment {
         return MovesFragment()
     }

@@ -5,12 +5,11 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-class Weakness {
+data class Weakness(
     @SerializedName("pokemonType")
     @Expose
-    var pokemonType: String? = null
+    var pokemonType: String? = null,
     @SerializedName("effect")
     @Expose
     var effect: Double? = null
-
-}
+)

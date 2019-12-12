@@ -68,11 +68,20 @@
             android:layout_marginTop="@dimen/margin_top_large"
             android:layout_marginEnd="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
-            android:background="@drawable/ic_types_dark"
+            android:background="@null"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@color/text_hint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -80,10 +89,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="@dimen/margin_small_min"
         android:layout_marginEnd="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content_constrainTitle"
-        android:layout_marginLeft="18dp" />
+        app:layout_constraintTop_toBottomOf="@+id/content_constrainTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

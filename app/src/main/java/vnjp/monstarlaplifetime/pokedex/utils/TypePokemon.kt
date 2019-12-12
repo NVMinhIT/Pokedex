@@ -1,15 +1,10 @@
 package vnjp.monstarlaplifetime.pokedex.utils
 
 enum class TypePokemon {
-
     GRASS,
-
     POISON,
-
     FIRE,
-
     FLYING,
-
     WATER,
     ROCK,
     STEEL,
@@ -24,6 +19,5 @@ enum class TypePokemon {
     DRAGON,
     DARK,
     BUG
-
 
 }

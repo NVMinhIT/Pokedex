@@ -6,6 +6,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import vnjp.monstarlaplifetime.pokedex.data.models.Items
 import vnjp.monstarlaplifetime.pokedex.data.models.Move
+import vnjp.monstarlaplifetime.pokedex.data.models.Weakness
 import vnjp.monstarlaplifetime.pokedex.data.response.DetailPokemonResponse
 import vnjp.monstarlaplifetime.pokedex.data.response.ItemsResponse
 import vnjp.monstarlaplifetime.pokedex.data.response.MoviePokemonResponse
@@ -36,4 +37,9 @@ interface ApiService {
     @Headers("Accept: application/json")
     @GET("pokemons/{id}")
     fun getDetailPokemonById(@Path("id") nameItems: String): Call<DetailPokemonResponse>
+
+
+    @Headers("Accept: application/json")
+    @GET("weaknesses/{type}")
+    fun getWeakNesses(@Path("type") type: String): Call<List<Weakness>>
 }

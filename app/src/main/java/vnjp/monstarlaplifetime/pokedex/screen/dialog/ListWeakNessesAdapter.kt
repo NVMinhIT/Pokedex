@@ -1,23 +1,24 @@
 package vnjp.monstarlaplifetime.pokedex.screen.dialog
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.net.Uri
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import vnjp.monstarlaplifetime.pokedex.MyApp
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Weakness
-import vnjp.monstarlaplifetime.pokedex.data.models.Weaknesses
 
 class ListWeakNessesAdapter(
     private val context: Context
 ) : RecyclerView.Adapter<ListWeakNessesAdapter.MyViewHolder>() {
-    private var listWeakNesses: List<Weaknesses> = emptyList()
-    fun setList(list: List<Weaknesses>) {
+    private var listWeakNesses: List<Weakness> = emptyList()
+    fun setList(list: List<Weakness>) {
         listWeakNesses = list
         notifyDataSetChanged()
 
@@ -47,15 +48,22 @@ class ListWeakNessesAdapter(
 
         private var imageView: ImageView = itemView.findViewById(R.id.imgIconWeakNess)
         private var tvIndex: TextView = itemView.findViewById(R.id.tvIndexWeakNess)
-        fun bind(weakNesses: Weaknesses) {
-            Glide.with(context)
-                .load(Uri.parse(weakNesses.imageWeakNesses))
-                .override(36, 36)
-                .error(R.mipmap.ic_launcher_round)
-                .into(imageView)
+        @SuppressLint("SetTextI18n")
+        fun bind(weakNesses: Weakness) {
 
-            tvIndex.text = weakNesses.indexWeakNesses
-
+            tvIndex.setText(weakNesses.effect.toString() + "x")
+            val lsDrawabl: ArrayList<Drawable> = ArrayList()
+            val type = weakNesses.pokemonType
+            weakNesses.pokemonType?.let {
+                MyApp.pokemonTypeMapping.get(type)?.let { idDrawAble ->
+                    ContextCompat.getDrawable(context, idDrawAble)?.let { icon ->
+                        lsDrawabl.add(icon)
+                    }
+                }
+            }
+            for (i in lsDrawabl) {
+                imageView.setImageDrawable(i)
+            }
         }
 
     }
