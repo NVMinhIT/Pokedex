@@ -101,6 +101,10 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
         val btEvolution = findViewById<Button>(R.id.btEvolution)
         val btMoves = findViewById<Button>(R.id.btMoves)
         val imbBack = findViewById<ImageButton>(R.id.imbBack)
+        val fragment = StartFragment()
+        supportFragmentManager.beginTransaction()
+            .add( R.id.content_frame_layout, fragment, fragment.javaClass.simpleName)
+            .commit()
     }
 
     @SuppressLint("ResourceType")
@@ -118,7 +122,7 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
                 btMoves.setTextColor(resources.getColor(R.color.dark_sky_blue))
                 val fragment = StartFragment()
                 supportFragmentManager.beginTransaction()
-                    .add(R.id.content_frame_layout, fragment, fragment.javaClass.simpleName)
+                    .replace(R.id.content_frame_layout, fragment, fragment.javaClass.simpleName)
                     .commit()
 
 
