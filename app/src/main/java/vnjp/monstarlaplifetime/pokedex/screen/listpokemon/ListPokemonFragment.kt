@@ -1,5 +1,6 @@
 package vnjp.monstarlaplifetime.pokedex.screen.listpokemon
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,13 +13,16 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.emedinaa.kotlinmvvm.di.Injection
+import kotlinx.android.synthetic.main.fragment_list_pokemon.*
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
 import vnjp.monstarlaplifetime.pokedex.screen.detail.detailpokemon.DetailPokemonActivity
 import vnjp.monstarlaplifetime.pokedex.screen.dialog.WeakNessPokemonDialogFragment
+import vnjp.monstarlaplifetime.pokedex.screen.main.MainActivity
 
 
-class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategoryListener {
+class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategoryListener,
+    MainActivity.MyInterfacePokemon {
 
     private lateinit var listPokemonAdapter: ListPokemonAdapter
     private lateinit var viewModel: ListPokemonViewModel
@@ -34,6 +38,16 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         return ListPokemonFragment()
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity.let {
+            if (activity is MainActivity) {
+                (activity as MainActivity).setMyinterFace(this)
+            }
+
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,8 +55,9 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_list_pokemon, container, false)
         initView(view)
-        viewModel = ViewModelProviders.of(this, ListPokemonFactory(Injection.providerRepository()))
-            .get(ListPokemonViewModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, ListPokemonFactory(Injection.providerRepository()))
+                .get(ListPokemonViewModel::class.java)
         initEvent()
         initViewModel()
         return view.rootView
@@ -53,7 +68,20 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         viewModel.pokemons.observe(this, Observer {
             listPokemonAdapter.setList(it)
         })
+        viewModel.isViewLoading.observe(this, Observer {
+            val visibility = if (it) View.VISIBLE else View.GONE
+            progressBar.visibility = visibility
+        })
 
+        viewModel.onMessageError.observe(this, Observer {
+            layoutError.visibility = View.VISIBLE
+            layoutEmpty.visibility = View.GONE
+
+        })
+        viewModel.isEmptyList.observe(this, Observer {
+            layoutEmpty.visibility = View.VISIBLE
+            layoutError.visibility = View.GONE
+        })
 
     }
 
@@ -87,6 +115,14 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         val newFragment = WeakNessPokemonDialogFragment()
         newFragment.setArguments(args)
         newFragment.show(childFragmentManager, newFragment.javaClass.simpleName)
+    }
+
+    override fun buttonClicked(name: String) {
+        listPokemonAdapter.filter(name)
+    }
+
+    override fun loadPokemon() {
+        initViewModel()
     }
 
 }

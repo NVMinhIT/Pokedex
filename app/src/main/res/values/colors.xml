@@ -22,4 +22,6 @@
     <!-- items Theme -->
     <color name="items_primary">#84e090</color>
     <color name="items_primary_dark">#84e090</color>
+    <color name="color_error">@color/color_red</color>
+    <color name="color_red">#d50000</color>
 </resources>

@@ -19,14 +19,34 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
         const val TAG = "TAG"
     }
 
+    private val _isViewLoading = MutableLiveData<Boolean>()
+    val isViewLoading: LiveData<Boolean> = _isViewLoading
+
+    private val _onMessageError = MutableLiveData<Any>()
+    val onMessageError: LiveData<Any> = _onMessageError
+
+    private val _isEmptyList = MutableLiveData<Boolean>()
+    val isEmptyList: LiveData<Boolean> = _isEmptyList
+    // lấy dữ liệu từ server
     fun loadPokemon() {
+        _isViewLoading.postValue(true)
         repository.getAllPokemons(object : OperationCallback {
             override fun onError(obj: Any?) {
                 Log.d(TAG, "No response")
+                _isViewLoading.postValue(false)
+                _onMessageError.postValue(obj)
             }
 
             override fun onSuccess(obj: Any?) {
-                _pokemon.value = obj as List<Pokemon>?
+                _isViewLoading.postValue(false)
+                if (obj != null && obj is List<*>) {
+                    if (obj.isEmpty()) {
+                        _isEmptyList.postValue(true)
+                    } else {
+                        _pokemon.value = obj as List<Pokemon>?
+                    }
+                }
+
             }
         })
     }

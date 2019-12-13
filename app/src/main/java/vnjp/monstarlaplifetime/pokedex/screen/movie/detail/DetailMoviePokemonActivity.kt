@@ -56,7 +56,6 @@ class DetailMoviePokemonActivity : AppCompatActivity(), View.OnClickListener {
         val imIconType: ImageView = findViewById(R.id.img_Water)
         val tvBasePower: TextView = findViewById(R.id.tvBasePower)
         val tvAccuracy: TextView = findViewById(R.id.tvAccuracy)
-        val tvName: TextView = findViewById(R.id.tvNameType)
         val tvPP: TextView = findViewById(R.id.tvPP)
 
         viewModel.moviesPokemon.observe(this, Observer {

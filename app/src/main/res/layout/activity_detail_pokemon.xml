@@ -50,34 +50,18 @@
                     android:textSize="@dimen/text_big"
                     tools:ignore="NotSibling,SpUsage" />
 
-                <RelativeLayout
-                    android:id="@+id/contentRelativeLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+
+                <ImageView
+                    android:id="@+id/img_Water"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="6dp"
                     android:layout_below="@+id/tvNamePokemon"
-                    android:layout_marginTop="6dp">
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    tools:ignore="ContentDescription" />
 
-                    <ImageView
-                        android:id="@+id/img_Water"
-                        android:layout_width="130dp"
-                        android:layout_height="40dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:background="@null"
-                        android:src="@drawable/ic_water"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:id="@+id/tvNameType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:textColor="#ffffff"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        tools:ignore="SmallSp" />
-                </RelativeLayout>
 
                 <!--                <ImageView-->
                 <!--                    android:id="@+id/img_Water"-->
@@ -93,10 +77,10 @@
                     android:id="@+id/tv_description_pokemon"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_below="@+id/contentRelativeLayout"
+                    android:layout_below="@+id/img_Water"
                     android:layout_marginStart="@dimen/margin_normal"
                     android:layout_marginLeft="@dimen/margin_normal"
-                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginTop="@dimen/margin_top_min"
                     android:layout_marginEnd="@dimen/margin_normal"
                     android:gravity="center"
                     android:text="@string/content_pokemon"
@@ -111,7 +95,7 @@
                 android:layout_width="@dimen/size_image"
                 android:layout_height="@dimen/size_image"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="58dp"
                 android:background="@null"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

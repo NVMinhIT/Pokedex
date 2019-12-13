@@ -1,5 +1,6 @@
 package vnjp.monstarlaplifetime.pokedex.screen.movie
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +12,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.emedinaa.kotlinmvvm.di.Injection
+import kotlinx.android.synthetic.main.fragment_list_pokemon.*
 import vnjp.monstarlaplifetime.pokedex.R
+import vnjp.monstarlaplifetime.pokedex.screen.main.MainActivity
 import vnjp.monstarlaplifetime.pokedex.screen.movie.detail.DetailMoviePokemonActivity
 
-class ListMovielPokemonFragment : Fragment() {
+class ListMovielPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
     private lateinit var listSkillAdapter: ListMovieAdapter
     private lateinit var viewmodel: ListMoviePokemonViewModel
     fun newInstance(): ListMovielPokemonFragment {
@@ -23,6 +26,16 @@ class ListMovielPokemonFragment : Fragment() {
 
     companion object {
         const val BUNDLE_NAME_MOVIE = "BUNDLE_SKILL_ID"
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity.let {
+            if (activity is MainActivity) {
+                (activity as MainActivity).setMyinterFace(this)
+            }
+
+        }
     }
 
     override fun onCreateView(
@@ -45,7 +58,19 @@ class ListMovielPokemonFragment : Fragment() {
             listSkillAdapter.setListSkill(it)
 
         })
-
+        viewmodel.isViewLoading.observe(this, Observer {
+            val visibility = if (it) View.VISIBLE else View.GONE
+            progressBar.visibility = visibility
+        })
+        viewmodel.onMessageError.observe(this, Observer {
+            layoutError.visibility = View.VISIBLE
+            layoutEmpty.visibility = View.GONE
+            // textViewError.text= "Error $it"
+        })
+        viewmodel.isEmptyList.observe(this, Observer {
+            layoutEmpty.visibility = View.VISIBLE
+            layoutError.visibility = View.GONE
+        })
     }
 
     private fun initView(view: View?) {
@@ -60,5 +85,13 @@ class ListMovielPokemonFragment : Fragment() {
         recyclerView?.adapter = listSkillAdapter
 
 
+    }
+
+    override fun buttonClicked(name: String) {
+        listSkillAdapter.filterMoves(name)
+    }
+
+    override fun loadPokemon() {
+        initViewModel()
     }
 }
