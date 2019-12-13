@@ -1,6 +1,8 @@
 package vnjp.monstarlaplifetime.pokedex
 
 import android.app.Application
+import vnjp.monstarlaplifetime.pokedex.utils.CommonF.CommonF
+
 
 class MyApp : Application() {
 
@@ -13,6 +15,7 @@ class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        CommonF(this)
         initPokemonTypeMapping()
         initPokemonType()
         initPokemonTypeString()
@@ -40,24 +43,24 @@ class MyApp : Application() {
     }
 
     private fun initPokemonType() {
-        pokemonTypesMapping.set("GRASS", R.drawable.ic_grass)
-        pokemonTypesMapping.set("POISON", R.drawable.ic_poison)
-        pokemonTypesMapping.set("FIRE", R.drawable.ic_fire)
-        pokemonTypesMapping.set("FLYING", R.drawable.ic_flying)
-        pokemonTypesMapping.set("WATER", R.drawable.ic_water)
-        pokemonTypesMapping.set("BUG", R.drawable.ic_bug)
-        pokemonTypesMapping.set("DARK", R.drawable.ic_dark)
-        pokemonTypesMapping.set("DRAGON", R.drawable.ic_dragon)
-        pokemonTypesMapping.set("ELECTRIC", R.drawable.ic_electric)
-        pokemonTypesMapping.set("FAIRY", R.drawable.ic_fairy)
-        pokemonTypesMapping.set("FIGHTING", R.drawable.ic_fight)
-        pokemonTypesMapping.set("GHOST", R.drawable.ic_ghost)
-        pokemonTypesMapping.set("GROUND", R.drawable.ic_ground)
-        pokemonTypesMapping.set("ICE", R.drawable.ic_ice)
-        pokemonTypesMapping.set("NORMAL", R.drawable.ic_normal)
-        pokemonTypesMapping.set("PSYCHIC", R.drawable.ic_psychic)
-        pokemonTypesMapping.set("ROCK", R.drawable.ic_rock)
-        pokemonTypesMapping.set("STEEL", R.drawable.ic_steel)
+        pokemonTypesMapping.set("GRASS", R.drawable.tag_grass)
+        pokemonTypesMapping.set("POISON", R.drawable.tag_poison)
+        pokemonTypesMapping.set("FIRE", R.drawable.tag_fire)
+        pokemonTypesMapping.set("FLYING", R.drawable.tag_flying)
+        pokemonTypesMapping.set("WATER", R.drawable.water)
+        pokemonTypesMapping.set("BUG", R.drawable.tag_bug)
+        pokemonTypesMapping.set("DARK", R.drawable.tag_dark)
+        pokemonTypesMapping.set("DRAGON", R.drawable.tag_dragon)
+        pokemonTypesMapping.set("ELECTRIC", R.drawable.tag_electric)
+        pokemonTypesMapping.set("FAIRY", R.drawable.tag_fairy)
+        pokemonTypesMapping.set("FIGHTING", R.drawable.tag_fight)
+        pokemonTypesMapping.set("GHOST", R.drawable.tag_ghost)
+        pokemonTypesMapping.set("GROUND", R.drawable.tag_ground)
+        pokemonTypesMapping.set("ICE", R.drawable.tag_ice)
+        pokemonTypesMapping.set("NORMAL", R.drawable.tag_normal)
+        pokemonTypesMapping.set("PSYCHIC", R.drawable.tag_psychic)
+        pokemonTypesMapping.set("ROCK", R.drawable.tag_rock)
+        pokemonTypesMapping.set("STEEL", R.drawable.tag_steel)
     }
 
     private fun initPokemonTypeString() {

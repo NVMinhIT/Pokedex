@@ -44,6 +44,23 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
 
     }
 
+    //lọc
+    fun filter(name: String) {
+        if (CommonF.isNullOrEmpty(name)) {
+            setList(listPokemon)
+        } else {
+            val orderList: MutableList<Pokemon> =
+                java.util.ArrayList<Pokemon>()
+            for (item in listPokemon) {
+                if (item.name?.contains(name)!!) {
+                    orderList.add(item)
+                }
+            }
+            setList(orderList)
+        }
+
+    }
+
     override fun getItemCount(): Int {
         return listPokemon.size
     }
@@ -52,6 +69,7 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
         val current = listPokemon[position]
         holder.bind(current)
     }
+
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var firstTime = true

@@ -2,6 +2,9 @@ package vnjp.monstarlaplifetime.pokedex.screen.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -9,20 +12,58 @@ import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.screen.items.ItemsPokemonFragment
 import vnjp.monstarlaplifetime.pokedex.screen.listpokemon.ListPokemonFragment
 import vnjp.monstarlaplifetime.pokedex.screen.movie.ListMovielPokemonFragment
+import vnjp.monstarlaplifetime.pokedex.utils.CommonF
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
+    private var myInterfaces: MyInterfacePokemon? = null
 
 
     companion object {
         var selectedId: Int = 10
     }
 
+    fun setMyinterFace(myInterface: MyInterfacePokemon) {
+        myInterfaces = myInterface
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
+        initEvent()
 
+    }
+
+    private fun initEvent() {
+        val edtSearchPokemon = findViewById<EditText>(R.id.edtSearchPokemon)
+        edtSearchPokemon.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                //  listPokemonAdapter.filter(s.toString())
+                myInterfaces?.buttonClicked(s.toString())
+                if (CommonF.isNullOrEmpty(s.toString())) {
+                    myInterfaces?.loadPokemon()
+                }
+
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
     }
 
     @SuppressLint("SetTextI18n")
@@ -48,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 tvTitle?.text = "Pokemon"
                 val fragment = ListPokemonFragment()
                 supportFragmentManager.beginTransaction()
-                    .add(R.id.frLayout, fragment, fragment.javaClass.simpleName)
+                    .replace(R.id.frLayout, fragment, fragment.javaClass.simpleName)
                     .commit()
                 return true
             }
@@ -74,4 +115,12 @@ class MainActivity : AppCompatActivity() {
         return false
 
     }
+
+    interface MyInterfacePokemon {
+        fun buttonClicked(name: String)
+        fun loadPokemon()
+    }
+
+
+
 }

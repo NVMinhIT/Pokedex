@@ -5,6 +5,7 @@ import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.api.ApiService
 import vnjp.monstarlaplifetime.pokedex.data.api.OperationCallback
 import vnjp.monstarlaplifetime.pokedex.data.api.ServiceRetrofit
@@ -16,6 +17,7 @@ import vnjp.monstarlaplifetime.pokedex.data.response.DetailPokemonResponse
 import vnjp.monstarlaplifetime.pokedex.data.response.ItemsResponse
 import vnjp.monstarlaplifetime.pokedex.data.response.MoviePokemonResponse
 import vnjp.monstarlaplifetime.pokedex.data.response.PokemonResponse
+import vnjp.monstarlaplifetime.pokedex.utils.CommonF
 
 class PokemonRepositoryImpl : PokemonRepository {
     companion object {
@@ -30,6 +32,10 @@ class PokemonRepositoryImpl : PokemonRepository {
 
     //lấy danh sách pokemon
     override fun getAllPokemons(callback: OperationCallback) {
+        if (!CommonF.isNetworkAvailable()) {
+            CommonF.showToastError(R.string.noInternet)
+            return
+        }
         val apiService: ApiService = ServiceRetrofit().getService()
         apiService.getAllPokemon().enqueue(object : Callback<PokemonResponse> {
             override fun onResponse(
@@ -61,6 +67,10 @@ class PokemonRepositoryImpl : PokemonRepository {
 
     // lấy danh sách moves pokemon
     override fun getAllMoviePokemon(callback: OperationCallback) {
+        if (!CommonF.isNetworkAvailable()) {
+            CommonF.showToastError(R.string.noInternet)
+            return
+        }
         val apiService: ApiService = ServiceRetrofit().getService()
         apiService.getAllMoviePokemon().enqueue(object : Callback<MoviePokemonResponse> {
             override fun onResponse(
@@ -87,9 +97,13 @@ class PokemonRepositoryImpl : PokemonRepository {
         })
 
     }
-    //lấy deatil pokemon theo tên
 
+    //lấy deatil pokemon theo tên
     override fun getMoviePokemon(name: String, callback: OperationCallback) {
+        if (!CommonF.isNetworkAvailable()) {
+            CommonF.showToastError(R.string.noInternet)
+            return
+        }
         val apiService: ApiService = ServiceRetrofit().getService()
         apiService.getMoviePokemon(name).enqueue(object : Callback<Move> {
             override fun onResponse(call: Call<Move>, response: Response<Move>) {
@@ -110,7 +124,12 @@ class PokemonRepositoryImpl : PokemonRepository {
 
     }
 
+    // lấy danh sách items pokemon
     override fun getAllItemsPokemon(callback: OperationCallback) {
+        if (!CommonF.isNetworkAvailable()) {
+            CommonF.showToastError(R.string.noInternet)
+            return
+        }
         val apiService: ApiService = ServiceRetrofit().getService()
         apiService.getAllItems().enqueue(object : Callback<ItemsResponse> {
             override fun onResponse(
@@ -138,7 +157,12 @@ class PokemonRepositoryImpl : PokemonRepository {
 
     }
 
+    // lấy items theo tên
     override fun getItemsPokemonByName(name: String, callback: OperationCallback) {
+        if (!CommonF.isNetworkAvailable()) {
+            CommonF.showToastError(R.string.noInternet)
+            return
+        }
         val apiService: ApiService = ServiceRetrofit().getService()
         apiService.getItemsPokemonByName(name).enqueue(object : Callback<Items> {
             override fun onResponse(call: Call<Items>, response: Response<Items>) {
@@ -157,7 +181,12 @@ class PokemonRepositoryImpl : PokemonRepository {
         })
     }
 
+    // lấy detail pokemon theo id
     override fun getDetailPokemonById(id: String, callback: OperationCallback) {
+        if (!CommonF.isNetworkAvailable()) {
+            CommonF.showToastError(R.string.noInternet)
+            return
+        }
         val apiService: ApiService = ServiceRetrofit().getService()
         apiService.getDetailPokemonById(id).enqueue(object : Callback<DetailPokemonResponse> {
             override fun onResponse(
@@ -179,7 +208,12 @@ class PokemonRepositoryImpl : PokemonRepository {
         })
     }
 
+    // lấy weakness pokemon
     override fun getWeakNesses(type: String, callback: OperationCallback) {
+        if (!CommonF.isNetworkAvailable()) {
+            CommonF.showToastError(R.string.noInternet)
+            return
+        }
         val apiService: ApiService = ServiceRetrofit().getService()
         apiService.getWeakNesses(type).enqueue(object : Callback<List<Weakness>> {
             override fun onResponse(

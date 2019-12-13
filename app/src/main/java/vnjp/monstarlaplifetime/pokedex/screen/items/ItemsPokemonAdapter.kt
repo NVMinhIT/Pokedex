@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Items
+import vnjp.monstarlaplifetime.pokedex.utils.CommonF
 
 
 class ItemsPokemonAdapter(private val context: Context, private val itemClick: (Int) -> Unit) :
@@ -47,6 +48,23 @@ class ItemsPokemonAdapter(private val context: Context, private val itemClick: (
 
     fun getPositionItems(position: Int): Items {
         return listItem[position]
+
+    }
+
+    //lọc
+    fun filterItems(name: String) {
+        if (CommonF.isNullOrEmpty(name)) {
+            setListItems(listItem)
+        } else {
+            val orderList: MutableList<Items> =
+                java.util.ArrayList<Items>()
+            for (item in listItem) {
+                if (item.name?.contains(name)!!) {
+                    orderList.add(item)
+                }
+            }
+            setListItems(orderList)
+        }
 
     }
 

@@ -95,7 +95,7 @@
     <dimen name="padding_tv_image">-6dp</dimen>
     <dimen name="size_56">56dp</dimen>
     <dimen name="margin_xxlarge">200dp</dimen>
-    <dimen name="size_image">170dp</dimen>
+    <dimen name="size_image">160dp</dimen>
     <dimen name="size_image_normal">100dp</dimen>
     <dimen name="size_image_xnormal">120dp</dimen>
     <dimen name="text_big">40dp</dimen>

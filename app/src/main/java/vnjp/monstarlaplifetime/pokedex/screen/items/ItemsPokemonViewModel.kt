@@ -13,21 +13,38 @@ class ItemsPokemonViewModel(private val repository: PokemonRepository) : ViewMod
         const val TAG = "TAG"
     }
 
+    private val _isViewLoading = MutableLiveData<Boolean>()
+    val isViewLoading: LiveData<Boolean> = _isViewLoading
     private val _items = MutableLiveData<List<Items>>().apply {
 
         value = emptyList()
     }
     val items: LiveData<List<Items>> = _items
+    private val _onMessageError = MutableLiveData<Any>()
+    val onMessageError: LiveData<Any> = _onMessageError
 
+    private val _isEmptyList = MutableLiveData<Boolean>()
+    val isEmptyList: LiveData<Boolean> = _isEmptyList
 
     fun loadItems() {
+        _isViewLoading.postValue(true)
         repository.getAllItemsPokemon(object : OperationCallback {
             override fun onError(obj: Any?) {
                 Log.d(TAG, "No response")
+                _isViewLoading.postValue(false)
+                _onMessageError.postValue(obj)
             }
 
             override fun onSuccess(obj: Any?) {
-                _items.value = obj as List<Items>?
+                _isViewLoading.postValue(false)
+                if (obj != null && obj is List<*>) {
+                    if (obj.isEmpty()) {
+                        _isEmptyList.postValue(true)
+                    } else {
+                        _items.value = obj as List<Items>?
+                    }
+                }
+
             }
         })
     }

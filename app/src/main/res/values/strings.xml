@@ -62,6 +62,9 @@ If used in a trainer battle, nothing happens and the ball is lost.</string>
     <string name="lv_32">Lv.32</string>
     <string name="mega_stone">Mega Stone</string>
     <string name="level">Level</string>
+    <string name="c_l_i_x_y_r">Đã có lỗi xảy ra</string>
+    <string name="d_li_u_tr_ng">Dữ liệu trống</string>
+    <string name="noInternet">Không có kết nối Internet</string>
 
 
 </resources>

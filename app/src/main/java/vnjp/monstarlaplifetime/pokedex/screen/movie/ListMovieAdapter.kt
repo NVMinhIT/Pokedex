@@ -24,7 +24,22 @@ class ListMovieAdapter(private val context: Context, private val itemClick: (Int
     companion object {
 
     }
+    //lọc
+    fun filterMoves(name: String) {
+        if (CommonF.isNullOrEmpty(name)) {
+            setListSkill(listSkill)
+        } else {
+            val orderList: MutableList<Move> =
+                java.util.ArrayList<Move>()
+            for (moves in listSkill) {
+                if (moves.name?.contains(name)!!) {
+                    orderList.add(moves)
+                }
+            }
+            setListSkill(orderList)
+        }
 
+    }
     fun setListSkill(list: List<Move>) {
         listSkill = list
         notifyDataSetChanged()
@@ -68,6 +83,8 @@ class ListMovieAdapter(private val context: Context, private val itemClick: (Int
                 itemClick(adapterPosition)
             }
         }
+
+
 
         fun bind(skill: Move) {
 
