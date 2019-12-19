@@ -17,10 +17,16 @@ import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
 import vnjp.monstarlaplifetime.pokedex.utils.CommonF
 
-class ListPokemonAdapter(private val context: Context, private val itemClick: (Int) -> Unit) :
+
+@Suppress("DEPRECATED_IDENTITY_EQUALS")
+class ListPokemonAdapter(private var context: Context, private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<ListPokemonAdapter.MyViewHolder>() {
     private var listPokemon: List<Pokemon> = emptyList()
     private var longClickItemPokemonListener: ILongClickItemCategoryListener? = null
+    companion object {
+        const val VIEW_TYPE_ITEM = 0
+        const val VIEW_TYPE_LOADING = 1
+    }
 
     fun setList(list: List<Pokemon>) {
         listPokemon = list
@@ -31,12 +37,19 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
         longClickItemPokemonListener = categoryListener
     }
 
+
+
+
+
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ListPokemonAdapter.MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_pokemon, parent, false)
-        return MyViewHolder(view)
+            val view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_pokemon, parent, false)
+            return MyViewHolder(view)
+
     }
 
     fun getPosition(position: Int): Pokemon {
@@ -60,19 +73,14 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
         }
 
     }
-
     override fun getItemCount(): Int {
         return listPokemon.size
     }
-
     override fun onBindViewHolder(holder: ListPokemonAdapter.MyViewHolder, position: Int) {
         val current = listPokemon[position]
         holder.bind(current)
     }
-
-
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var firstTime = true
         private val imageView: ImageView = itemView.findViewById(R.id.imgPokemon);
         private val tvTitle: TextView = itemView.findViewById(R.id.tvNamePokemon);
         private val tvCode: TextView = itemView.findViewById(R.id.tvCodePokemon);
@@ -130,6 +138,8 @@ class ListPokemonAdapter(private val context: Context, private val itemClick: (I
             pokemon: Pokemon?
         )
     }
+
+
 }
 
 

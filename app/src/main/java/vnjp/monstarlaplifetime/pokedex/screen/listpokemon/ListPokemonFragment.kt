@@ -3,6 +3,7 @@ package vnjp.monstarlaplifetime.pokedex.screen.listpokemon
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,15 +24,16 @@ import vnjp.monstarlaplifetime.pokedex.screen.main.MainActivity
 
 class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategoryListener,
     MainActivity.MyInterfacePokemon {
-
     private lateinit var listPokemonAdapter: ListPokemonAdapter
     private lateinit var viewModel: ListPokemonViewModel
-    var arr = arrayListOf<Pokemon>()
+    private lateinit var recyclerView: RecyclerView
+    var arr: List<Pokemon> = listOf()
 
     companion object {
         const val BUNDLE_POKEMON_ID = "BUNDLE_POKEMON_ID"
         const val POKEMON_ID = "POKEMON_ID"
         const val POKEMON_TYPE = "POKEMON_TYPE"
+        var index: Int = 1
     }
 
     fun newInstance(): ListPokemonFragment {
@@ -58,15 +60,14 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         viewModel =
             ViewModelProviders.of(this, ListPokemonFactory(Injection.providerRepository()))
                 .get(ListPokemonViewModel::class.java)
-        initEvent()
         initViewModel()
         return view.rootView
     }
-
     private fun initViewModel() {
         viewModel.loadPokemon()
         viewModel.pokemons.observe(this, Observer {
-            listPokemonAdapter.setList(it)
+            arr = it
+            listPokemonAdapter.setList(arr)
         })
         viewModel.isViewLoading.observe(this, Observer {
             val visibility = if (it) View.VISIBLE else View.GONE
@@ -85,17 +86,13 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
 
     }
 
-    private fun initEvent() {
-
-    }
 
     private fun initView(view: View) {
 
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rvListPokemon)
+        recyclerView = view.findViewById(R.id.rvListPokemon)
         listPokemonAdapter = ListPokemonAdapter(this.requireActivity()) {
             val intent = Intent(context, DetailPokemonActivity::class.java)
-            intent.putExtra(BUNDLE_POKEMON_ID, listPokemonAdapter.getPosition(it).id)
+            intent.putExtra(BUNDLE_POKEMON_ID, listPokemonAdapter.getPosition(it)?.id)
             startActivity(intent)
 
         }
@@ -120,7 +117,6 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     override fun buttonClicked(name: String) {
         listPokemonAdapter.filter(name)
     }
-
     override fun loadPokemon() {
         initViewModel()
     }

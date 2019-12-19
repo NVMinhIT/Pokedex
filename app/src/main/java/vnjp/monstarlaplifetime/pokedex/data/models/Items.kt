@@ -18,7 +18,6 @@ data class Items(
     @SerializedName("effects")
     @Expose
     var effects: String? = null
-) {
+)
 
 
-}

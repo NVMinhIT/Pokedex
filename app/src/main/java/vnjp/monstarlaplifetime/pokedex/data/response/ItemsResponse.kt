@@ -6,11 +6,11 @@ import vnjp.monstarlaplifetime.pokedex.data.models.Items
 
 
 class ItemsResponse {
+
     @SerializedName("total")
     @Expose
     var total: Int? = null
     @SerializedName("items")
     @Expose
     var items: List<Items>? = null
-
 }
