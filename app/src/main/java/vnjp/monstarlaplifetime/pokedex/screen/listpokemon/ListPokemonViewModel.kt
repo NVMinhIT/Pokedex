@@ -18,7 +18,11 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
     companion object {
         const val TAG = "TAG"
     }
+    private val _pokemonLoadMore = MutableLiveData<List<Pokemon>>().apply {
 
+        value = emptyList()
+    }
+    val pokemonloadMore: LiveData<List<Pokemon>> = _pokemonLoadMore
     private val _isViewLoading = MutableLiveData<Boolean>()
     val isViewLoading: LiveData<Boolean> = _isViewLoading
 
@@ -44,6 +48,29 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
                         _isEmptyList.postValue(true)
                     } else {
                         _pokemon.value = obj as List<Pokemon>?
+                    }
+                }
+
+            }
+        })
+    }
+
+    fun loadPokemonLoadMore(page: Int, records: Int) {
+       // _isViewLoading.postValue(true)
+        repository.getAllPokemonLoadMore(page,records,object : OperationCallback {
+            override fun onError(obj: Any?) {
+                Log.d(TAG, "No response")
+               // _isViewLoading.postValue(false)
+               // _onMessageError.postValue(obj)
+            }
+
+            override fun onSuccess(obj: Any?) {
+                //_isViewLoading.postValue(false)
+                if (obj != null && obj is List<*>) {
+                    if (obj.isEmpty()) {
+                        //_isEmptyList.postValue(true)
+                    } else {
+                        _pokemonLoadMore.value = obj as List<Pokemon>?
                     }
                 }
 

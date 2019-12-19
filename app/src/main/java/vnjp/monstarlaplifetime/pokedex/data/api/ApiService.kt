@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 import vnjp.monstarlaplifetime.pokedex.data.models.Items
 import vnjp.monstarlaplifetime.pokedex.data.models.Move
 import vnjp.monstarlaplifetime.pokedex.data.models.Weakness
@@ -17,6 +18,10 @@ interface ApiService {
     @Headers("Accept: application/json")
     @GET("pokemons")
     fun getAllPokemon(): Call<PokemonResponse>
+
+    @Headers("Accept: application/json")
+    @GET("pokemons/?page={page}&records={records}")
+    fun getAllPokemonLoadMore(@Query("page") page: Int, @Query("records") pageSize: Int): Call<PokemonResponse>
 
     @Headers("Accept: application/json")
     @GET("moves")

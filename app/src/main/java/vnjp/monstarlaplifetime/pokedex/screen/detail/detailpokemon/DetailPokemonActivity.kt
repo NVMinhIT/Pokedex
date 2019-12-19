@@ -23,6 +23,12 @@ import vnjp.monstarlaplifetime.pokedex.screen.detail.movie.MovesFragment
 import vnjp.monstarlaplifetime.pokedex.screen.detail.start.StartFragment
 import vnjp.monstarlaplifetime.pokedex.screen.listpokemon.ListPokemonFragment
 
+
+/*
+-- @Create_By NvMinh at 16/12/2019
+-- @Description
+
+*/
 @Suppress("DEPRECATION")
 class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var viewModel: DetailsPokemonViewModel
@@ -88,6 +94,7 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
 
         }
     }
+
 
     private fun initEvent() {
         btStart.setOnClickListener(this)

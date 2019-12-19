@@ -46,6 +46,7 @@ class PokemonRepositoryImpl : PokemonRepository {
                     if (response.isSuccessful) {
                         Log.v(TAG, "data ${it.pokemons}")
                         callback.onSuccess(it.pokemons)
+                        Log.d(TAG, "size ${it.pokemons?.size}")
                     } else {
                         callback.onError(it.total)
                     }
@@ -61,8 +62,6 @@ class PokemonRepositoryImpl : PokemonRepository {
                 callback.onError(t.message)
             }
         })
-
-
     }
 
     // lấy danh sách moves pokemon
@@ -95,10 +94,9 @@ class PokemonRepositoryImpl : PokemonRepository {
                 callback.onError(t.message)
             }
         })
-
     }
 
-    //lấy deatil pokemon theo tên
+    //lấy detail pokemon theo tên
     override fun getMoviePokemon(name: String, callback: OperationCallback) {
         if (!CommonF.isNetworkAvailable()) {
             CommonF.showToastError(R.string.noInternet)
@@ -120,8 +118,6 @@ class PokemonRepositoryImpl : PokemonRepository {
                 callback.onError(t.message)
             }
         })
-
-
     }
 
     // lấy danh sách items pokemon
@@ -143,7 +139,6 @@ class PokemonRepositoryImpl : PokemonRepository {
                         callback.onError("No Response")
                     }
                 }
-
 
             }
 
@@ -233,6 +228,37 @@ class PokemonRepositoryImpl : PokemonRepository {
 
             override fun onFailure(
                 call: Call<List<Weakness>>,
+                t: Throwable
+            ) {
+                callback.onError(t.message)
+            }
+        })
+    }
+
+    override fun getAllPokemonLoadMore(Page: Int, records: Int, callback: OperationCallback) {
+        if (!CommonF.isNetworkAvailable()) {
+            CommonF.showToastError(R.string.noInternet)
+            return
+        }
+        val apiService: ApiService = ServiceRetrofit().getService()
+        apiService.getAllPokemonLoadMore(Page, records).enqueue(object : Callback<PokemonResponse> {
+            override fun onResponse(
+                call: Call<PokemonResponse>,
+                response: Response<PokemonResponse>
+            ) {
+                response.body()?.let {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(it)
+                    } else {
+                        callback.onError("No Response")
+                    }
+                }
+
+
+            }
+
+            override fun onFailure(
+                call: Call<PokemonResponse>,
                 t: Throwable
             ) {
                 callback.onError(t.message)
