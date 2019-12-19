@@ -248,7 +248,7 @@ class PokemonRepositoryImpl : PokemonRepository {
             ) {
                 response.body()?.let {
                     if (response.isSuccessful) {
-                        callback.onSuccess(it)
+                        callback.onSuccess(it.pokemons as ArrayList)
                     } else {
                         callback.onError("No Response")
                     }

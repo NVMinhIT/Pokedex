@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -21,14 +22,16 @@ import vnjp.monstarlaplifetime.pokedex.utils.CommonF
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
 class ListPokemonAdapter(private var context: Context, private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<ListPokemonAdapter.MyViewHolder>() {
-    private var listPokemon: List<Pokemon> = emptyList()
+    private var listPokemon: ArrayList<Pokemon> = arrayListOf()
     private var longClickItemPokemonListener: ILongClickItemCategoryListener? = null
-    companion object {
-        const val VIEW_TYPE_ITEM = 0
-        const val VIEW_TYPE_LOADING = 1
-    }
 
-    fun setList(list: List<Pokemon>) {
+    val TYPE_FOOTER = 1
+    val TYPE_ITEM = 2
+    private lateinit var view: View
+
+    protected var showLoader = true
+
+    fun setList(list: ArrayList<Pokemon>) {
         listPokemon = list
         notifyDataSetChanged()
     }
@@ -38,19 +41,30 @@ class ListPokemonAdapter(private var context: Context, private val itemClick: (I
     }
 
 
-
-
-
+    fun addAll(newList: ArrayList<Pokemon>) {
+        val lastIndex: Int = listPokemon.size - 1
+        listPokemon.addAll(newList)
+        notifyItemRangeInserted(lastIndex, newList.size)
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ListPokemonAdapter.MyViewHolder {
-            val view =
+        if (viewType == TYPE_ITEM) {
+            view =
                 LayoutInflater.from(parent.context).inflate(R.layout.item_pokemon, parent, false)
             return MyViewHolder(view)
-
+        } else {
+            if (viewType == TYPE_FOOTER) {
+                val v: View = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.items_loading, parent, false)
+                return MyViewHolder(v)
+            }
+        }
+        return MyViewHolder(view)
     }
+
 
     fun getPosition(position: Int): Pokemon {
         return listPokemon[position]
@@ -62,7 +76,7 @@ class ListPokemonAdapter(private var context: Context, private val itemClick: (I
         if (CommonF.isNullOrEmpty(name)) {
             setList(listPokemon)
         } else {
-            val orderList: MutableList<Pokemon> =
+            val orderList: ArrayList<Pokemon> =
                 java.util.ArrayList<Pokemon>()
             for (item in listPokemon) {
                 if (item.name?.contains(name)!!) {
@@ -73,23 +87,66 @@ class ListPokemonAdapter(private var context: Context, private val itemClick: (I
         }
 
     }
+
     override fun getItemCount(): Int {
         return listPokemon.size
     }
+
     override fun onBindViewHolder(holder: ListPokemonAdapter.MyViewHolder, position: Int) {
         val current = listPokemon[position]
         holder.bind(current)
     }
+
+    private fun getItem(position: Int): Pokemon {
+
+        return listPokemon.get(position)
+
+
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if ((position == listPokemon.size - 1) && showLoader) {
+            return TYPE_FOOTER;
+        }
+        return TYPE_ITEM;
+    }
+
+    fun removeItem(position: Int) {
+        listPokemon.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun showLoading(status: Boolean) {
+        showLoader = status
+    }
+
+
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private var pos = 0
+        private lateinit var pokemon: Pokemon
         private val imageView: ImageView = itemView.findViewById(R.id.imgPokemon);
         private val tvTitle: TextView = itemView.findViewById(R.id.tvNamePokemon);
         private val tvCode: TextView = itemView.findViewById(R.id.tvCodePokemon);
         private val layout: LinearLayout = itemView.findViewById(R.id.contentLinearLayoutIcon)
+         var progressBar: ProgressBar
+
+        init {
+            progressBar = itemView.findViewById(R.id.progressBar)
+        }
 
         init {
             itemView.setOnClickListener {
                 itemClick(adapterPosition)
             }
+
+        }
+
+        fun setPosition(pos: Int) {
+            this.pos = pos
+        }
+
+        fun setSingleBean(pokemon: Pokemon) {
+            this.pokemon = pokemon
         }
 
         fun bind(pokemon: Pokemon) {
