@@ -3,7 +3,6 @@ package vnjp.monstarlaplifetime.pokedex.screen.listpokemon
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +26,14 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     private lateinit var listPokemonAdapter: ListPokemonAdapter
     private lateinit var viewModel: ListPokemonViewModel
     private lateinit var recyclerView: RecyclerView
-    var arr: List<Pokemon> = listOf()
+    private lateinit var layoutManager: LinearLayoutManager
+    var arr: ArrayList<Pokemon> = arrayListOf()
+    var pageIndex = 1 // you can pass 1,2,3...
+
+    var pageCount = 10 //you can pass 10,20...
+
+
+    var isApiSuccess = false
 
     companion object {
         const val BUNDLE_POKEMON_ID = "BUNDLE_POKEMON_ID"
@@ -55,20 +61,47 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_list_pokemon, container, false)
-        initView(view)
         viewModel =
             ViewModelProviders.of(this, ListPokemonFactory(Injection.providerRepository()))
                 .get(ListPokemonViewModel::class.java)
+        val view: View = inflater.inflate(R.layout.fragment_list_pokemon, container, false)
+        initView(view)
         initViewModel()
+        initEvent()
         return view.rootView
     }
-    private fun initViewModel() {
-        viewModel.loadPokemon()
-        viewModel.pokemons.observe(this, Observer {
-            arr = it
-            listPokemonAdapter.setList(arr)
+
+    private fun initEvent() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (isApiSuccess) {
+                    pageIndex++
+                    //listTestApiCall(pageIndex, searchQuery)
+
+                    listPokemonAdapter.showLoading(true)
+                    recyclerView.post(Runnable {
+                        // There is no need to use notifyDataSetChanged()
+                        listPokemonAdapter.notifyDataSetChanged()
+                    })
+                }
+            }
         })
+
+
+    }
+
+
+    private fun initViewModel() {
+//        viewModel.loadPokemon()
+//        viewModel.pokemons.observe(this, Observer {
+//            //arr = it
+//            listPokemonAdapter.setList(it as MutableList<Pokemon>)
+//        })
         viewModel.isViewLoading.observe(this, Observer {
             val visibility = if (it) View.VISIBLE else View.GONE
             progressBar.visibility = visibility
@@ -96,11 +129,31 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
             startActivity(intent)
 
         }
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        layoutManager =
+            LinearLayoutManager(context?.applicationContext, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = layoutManager
         recyclerView.adapter = listPokemonAdapter
         listPokemonAdapter.setLongClickItemCategoryListener(this)
+        listTestApiCall(pageCount, pageIndex);
 
+    }
 
+    private fun listTestApiCall(pageCount: Int, pageIndex: Int) {
+        val isFirstPage = if (pageIndex == 1) true else false
+
+        if (isFirstPage) {
+
+            viewModel.loadPokemonLoadMore(pageCount, pageIndex)
+            viewModel.pokemonloadMore.observe(this, Observer {
+
+                it?.let {
+                    arr = it
+                    listPokemonAdapter.addAll(it)
+                }
+                listPokemonAdapter.showLoading(false)
+                listPokemonAdapter.notifyDataSetChanged()
+            })
+        }
     }
 
     override fun onLongClickItemCategory(pokemon: Pokemon?) {
@@ -117,6 +170,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     override fun buttonClicked(name: String) {
         listPokemonAdapter.filter(name)
     }
+
     override fun loadPokemon() {
         initViewModel()
     }
