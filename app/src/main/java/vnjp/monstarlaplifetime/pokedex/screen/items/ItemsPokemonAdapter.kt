@@ -68,6 +68,7 @@ class ItemsPokemonAdapter(private val context: Context, private val itemClick: (
 
     }
 
+
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvNameItem: TextView = itemView.findViewById(R.id.tvNameItem)
         private val imageIconItem: ImageView = itemView.findViewById(R.id.imgIconItem)

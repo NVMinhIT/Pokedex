@@ -8,7 +8,7 @@ import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
 class PokemonResponse {
     @SerializedName("pokemons")
     @Expose
-    var pokemons: List<Pokemon>? = null
+    var pokemons: ArrayList<Pokemon>? = null
     @SerializedName("total")
     @Expose
     var total: Int? = null

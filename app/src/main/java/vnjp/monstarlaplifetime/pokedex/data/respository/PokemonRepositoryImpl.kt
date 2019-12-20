@@ -235,20 +235,20 @@ class PokemonRepositoryImpl : PokemonRepository {
         })
     }
 
-    override fun getAllPokemonLoadMore(Page: Int, records: Int, callback: OperationCallback) {
+    override fun getAllPokemonLoadMore(Page: Int, callback: OperationCallback) {
         if (!CommonF.isNetworkAvailable()) {
             CommonF.showToastError(R.string.noInternet)
             return
         }
         val apiService: ApiService = ServiceRetrofit().getService()
-        apiService.getAllPokemonLoadMore(Page, records).enqueue(object : Callback<PokemonResponse> {
+        apiService.getAllPokemonLoadMore(Page).enqueue(object : Callback<PokemonResponse> {
             override fun onResponse(
                 call: Call<PokemonResponse>,
                 response: Response<PokemonResponse>
             ) {
                 response.body()?.let {
                     if (response.isSuccessful) {
-                        callback.onSuccess(it.pokemons as ArrayList)
+                        callback.onSuccess(it)
                     } else {
                         callback.onError("No Response")
                     }
