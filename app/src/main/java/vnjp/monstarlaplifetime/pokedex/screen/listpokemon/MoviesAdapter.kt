@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -18,56 +17,63 @@ import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
 import vnjp.monstarlaplifetime.pokedex.utils.CommonF
 
-
-class ListPokemonAdapter(
+class MoviesAdapter(
     private var context: Context, private val itemClick: (Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder?>() {
-
-    private var listPokemon: ArrayList<Pokemon>? = arrayListOf()
+    val TYPE_MOVIE = 0
+    val TYPE_LOAD = 1
+    private var listPokemon: ArrayList<Pokemon> = arrayListOf()
     private var longClickItemPokemonListener: ILongClickItemCategoryListener? = null
+    private var loadMoreListener: OnLoadMoreListener? = null
+    var isLoading = false
+    var isMoreDataAvailable: Boolean = true
 
-
-    companion object {
-        const val TYPE_MOVIE = 0
-        const val TYPE_LOAD = 1
-    }
-
-
-    // set list
     fun setList(list: ArrayList<Pokemon>) {
         listPokemon = list
         notifyDataSetChanged()
     }
 
-    // set long click
     fun setLongClickItemCategoryListener(categoryListener: ILongClickItemCategoryListener) {
         longClickItemPokemonListener = categoryListener
     }
 
+    fun addAllPokemon(newList: ArrayList<Pokemon>) {
+        val lastIndex: Int = listPokemon.size - 1
+        listPokemon.addAll(newList)
+        notifyItemRangeInserted(lastIndex, newList.size)
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val curent = listPokemon?.get(position)
-        (holder as MovieHolder).bindData(curent)
+        if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading && loadMoreListener != null) {
+            isLoading = true
+            loadMoreListener!!.onLoadMore()
+        }
+        if (getItemViewType(position) == TYPE_MOVIE) {
+            (holder as MovieHolder).bindData(listPokemon[position])
+        }
+        //No else part needed as load holder doesn't bind any data
     }
 
-
+    override fun getItemViewType(position: Int): Int {
+        return if (listPokemon.get(position).name.equals("name")) {
+            TYPE_MOVIE
+        } else {
+            TYPE_LOAD
+        }
+    }
     fun getPosition(position: Int): Pokemon {
-        return listPokemon?.get(position)!!
+        return listPokemon[position]
 
     }
-
-//    override fun getItemViewType(position: Int): Int {
-//        return if (listPokemon?.get(position) == null) TYPE_LOAD else TYPE_MOVIE
-//    }
-
     //lọc
     fun filter(name: String) {
         if (CommonF.isNullOrEmpty(name)) {
-            listPokemon?.let { setList(it) }
+            setList(listPokemon)
         } else {
             val orderList: ArrayList<Pokemon> =
                 java.util.ArrayList<Pokemon>()
-            for (item in this.listPokemon!!) {
+            for (item in listPokemon) {
                 if (item.name?.contains(name)!!) {
                     orderList.add(item)
                 }
@@ -78,7 +84,7 @@ class ListPokemonAdapter(
     }
 
     override fun getItemCount(): Int {
-        return listPokemon!!.size
+        return listPokemon.size
     }
 
     /* VIEW HOLDERS */
@@ -137,28 +143,27 @@ class ListPokemonAdapter(
 
     }
 
+    internal class LoadHolder(itemView: View?) :
+        RecyclerView.ViewHolder(itemView!!)
 
-    inner class LoadHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-        private var progressBar: ProgressBar
-
-        init {
-            progressBar = itemView.findViewById(R.id.progressBarLoading)
-        }
+    fun notifyDataChanged() {
+        notifyDataSetChanged()
+        isLoading = false
     }
 
+
+    fun setLoadMoreListener(loadMoreListener: OnLoadMoreListener?) {
+        this.loadMoreListener = loadMoreListener
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(context)
         return if (viewType == TYPE_MOVIE) {
-            val view: View =
-                LayoutInflater.from(parent.context).inflate(R.layout.item_pokemon, parent, false)
-            MovieHolder(view)
+            MovieHolder(inflater.inflate(R.layout.item_pokemon, parent, false))
         } else {
-            val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.items_loading, parent, false)
-            LoadHolder(view)
+            LoadHolder(inflater.inflate(R.layout.items_loading, parent, false))
         }
-
-
     }
 
     interface ILongClickItemCategoryListener {
@@ -167,5 +172,10 @@ class ListPokemonAdapter(
         )
     }
 
-
+    interface OnLoadMoreListener {
+        fun onLoadMore()
+    }
 }
+
+
+

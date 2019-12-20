@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import vnjp.monstarlaplifetime.pokedex.data.api.OperationCallback
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
+import vnjp.monstarlaplifetime.pokedex.data.response.PokemonResponse
 import vnjp.monstarlaplifetime.pokedex.data.respository.PokemonRepository
 
+@Suppress("UNCHECKED_CAST")
 class ListPokemonViewModel(private val repository: PokemonRepository) : ViewModel() {
     private val _pokemon = MutableLiveData<List<Pokemon>>().apply {
 
@@ -19,8 +21,8 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
         const val TAG = "TAG"
     }
 
-    private val _pokemonLoadMore = MutableLiveData<ArrayList<Pokemon>>()
-    val pokemonloadMore: LiveData<ArrayList<Pokemon>> = _pokemonLoadMore
+    private val _pokemonLoadMore = MutableLiveData<PokemonResponse>()
+    val pokemonloadMore: LiveData<PokemonResponse> = _pokemonLoadMore
     private val _isViewLoading = MutableLiveData<Boolean>()
     val isViewLoading: LiveData<Boolean> = _isViewLoading
 
@@ -53,9 +55,9 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
         })
     }
 
-    fun loadPokemonLoadMore(page: Int, records: Int) {
+    fun loadPokemonLoadMore(page: Int) {
         // _isViewLoading.postValue(true)
-        repository.getAllPokemonLoadMore(page, records, object : OperationCallback {
+        repository.getAllPokemonLoadMore(page, object : OperationCallback {
             override fun onError(obj: Any?) {
                 Log.d(TAG, "No response")
                 // _isViewLoading.postValue(false)
@@ -68,7 +70,7 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
                     if (obj.isEmpty()) {
                         //_isEmptyList.postValue(true)
                     } else {
-                        _pokemonLoadMore.value = obj as ArrayList<Pokemon>?
+                        _pokemonLoadMore.value = obj as PokemonResponse?
                     }
                 }
 
