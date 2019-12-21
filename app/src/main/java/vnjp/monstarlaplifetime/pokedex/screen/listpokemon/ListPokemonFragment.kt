@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.emedinaa.kotlinmvvm.di.Injection
-import kotlinx.android.synthetic.main.customtoast_layout.*
+import kotlinx.android.synthetic.main.fragment_list_pokemon.*
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
 import vnjp.monstarlaplifetime.pokedex.screen.detail.detailpokemon.DetailPokemonActivity
@@ -28,8 +27,9 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     private lateinit var viewModel: ListPokemonViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutManager: LinearLayoutManager
-    var arr: ArrayList<Pokemon?> = arrayListOf()
-    var pageIndex = 1 // you can pass 1,2,3...
+    var arr: MutableList<Pokemon?> = arrayListOf()
+    var arrayy: MutableList<Pokemon?> = arrayListOf()
+    // you can pass 1,2,3...
     var isLoading: Boolean = false
     var total: Int = 0
 
@@ -37,7 +37,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         const val BUNDLE_POKEMON_ID = "BUNDLE_POKEMON_ID"
         const val POKEMON_ID = "POKEMON_ID"
         const val POKEMON_TYPE = "POKEMON_TYPE"
-
+        var pageIndex = 1
     }
 
     override fun onAttach(context: Context) {
@@ -65,17 +65,31 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         return view.rootView
     }
 
-    private fun initScrollListener() {
-
-        viewModel.loadPokemonLoadMore(pageIndex)
+    private fun initViewModel() {
+        viewModel.loadPokemonLoadMore(1)
         viewModel.pokemonloadMore.observe(this, Observer {
-
-            it.pokemons?.let { it1 -> arr.addAll(it1) }
-            listPokemonAdapter.setList(it.pokemons!!)
-            total = it.total!!
-            Log.d("LINH", "${arr.size}")
+            arr.addAll(it)
+            listPokemonAdapter.setList(arr)
 
         })
+        viewModel.isViewLoading.observe(this, Observer {
+            val visibility = if (it) View.VISIBLE else View.GONE
+            progressBar.visibility = visibility
+        })
+
+        viewModel.onMessageError.observe(this, Observer {
+            layoutError.visibility = View.VISIBLE
+            layoutEmpty.visibility = View.GONE
+
+        })
+        viewModel.isEmptyList.observe(this, Observer {
+            layoutEmpty.visibility = View.VISIBLE
+            layoutError.visibility = View.GONE
+        })
+
+    }
+
+    private fun initScrollListener() {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -85,9 +99,8 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
                 super.onScrolled(recyclerView, dx, dy)
                 val linearLayoutManager =
                     recyclerView.layoutManager as LinearLayoutManager?
-                val dataSize =  arr.size
                 if (!isLoading) {
-                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == dataSize - 1 && dataSize < total) { //bottom of list!
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == arr.size - 1) { //bottom of list!
                         loadMore()
                         isLoading = true
                     }
@@ -102,39 +115,19 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         listPokemonAdapter.notifyItemInserted(arr.size - 1)
         val handler = Handler()
         handler.postDelayed(Runnable {
-            arr.removeAt(arr.size - 1)
+            //arr.removeAt(arr.size + 1)
+
             val scrollPosition: Int = arr.size
+//            listPokemonAdapter.notifyItemRangeInserted(
+//                scrollPosition,
+//                arr.size + 1
+//            )
             listPokemonAdapter.notifyItemRemoved(scrollPosition)
-            //val currentSize = scrollPosition
             pageIndex++
             viewModel.loadPokemonLoadMore(pageIndex)
-            viewModel.pokemonloadMore.observe(this, Observer {
-                arr.addAll(it.pokemons!!)
-
-                listPokemonAdapter.notifyDataSetChanged()
-            })
-
+            listPokemonAdapter.notifyDataSetChanged()
             isLoading = false
         }, 2000)
-    }
-
-    private fun initViewModel() {
-
-//        viewModel.isViewLoading.observe(this, Observer {
-//            val visibility = if (it) View.VISIBLE else View.GONE
-//            progressBar.visibility = visibility
-//        })
-//
-//        viewModel.onMessageError.observe(this, Observer {
-//            layoutError.visibility = View.VISIBLE
-//            layoutEmpty.visibility = View.GONE
-//
-//        })
-//        viewModel.isEmptyList.observe(this, Observer {
-//            layoutEmpty.visibility = View.VISIBLE
-//            layoutError.visibility = View.GONE
-//        })
-
     }
 
 
@@ -155,7 +148,6 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
 
     override fun onLongClickItemCategory(pokemon: Pokemon?) {
         val s = pokemon?.pokemonTypes?.get(0)
-        Log.d("MINH", "${s}")
         val args = Bundle()
         args.putString(POKEMON_ID, pokemon?.id)
         args.putString(POKEMON_TYPE, s)
@@ -174,3 +166,5 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
 
 
 }
+
+

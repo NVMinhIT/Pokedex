@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.emedinaa.kotlinmvvm.di.Injection
+import kotlinx.android.synthetic.main.fragment_item_pokemon.*
 import kotlinx.android.synthetic.main.fragment_list_pokemon.*
 import vnjp.monstarlaplifetime.pokedex.R
 import vnjp.monstarlaplifetime.pokedex.screen.items.detail.DetailItemsActivity
@@ -58,7 +59,7 @@ class ItemsPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
         })
         viewModel.isViewLoading.observe(this, Observer {
             val visibility = if (it) View.VISIBLE else View.GONE
-            progressBar.visibility = visibility
+            progressBar1.visibility = visibility
         })
         viewModel.onMessageError.observe(this, Observer {
             layoutError.visibility = View.VISIBLE
