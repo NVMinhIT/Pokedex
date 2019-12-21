@@ -21,14 +21,14 @@
         <activity android:name=".screen.movie.detail.DetailMoviePokemonActivity" />
         <activity android:name=".screen.detail.detailpokemon.DetailPokemonActivity" />
         <activity android:name=".screen.flash.SplashActivity">
+
+        </activity>
+        <activity android:name=".screen.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".screen.main.MainActivity">
-
 
         </activity>
     </application>

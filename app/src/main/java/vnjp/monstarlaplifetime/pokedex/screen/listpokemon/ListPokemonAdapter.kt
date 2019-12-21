@@ -24,18 +24,19 @@ class ListPokemonAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder?>() {
 
-    private var listPokemon: ArrayList<Pokemon>? = arrayListOf()
+    private var listPokemon: List<Pokemon?> = mutableListOf()
     private var longClickItemPokemonListener: ILongClickItemCategoryListener? = null
 
 
     companion object {
         const val TYPE_MOVIE = 0
         const val TYPE_LOAD = 1
+        //const val pageIndex = 1
     }
 
 
     // set list
-    fun setList(list: ArrayList<Pokemon>) {
+    fun setList(list: List<Pokemon?>) {
         listPokemon = list
         notifyDataSetChanged()
     }
@@ -46,13 +47,13 @@ class ListPokemonAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val curent = listPokemon?.get(position)
+        val curent = listPokemon.get(position)
         (holder as MovieHolder).bindData(curent)
     }
 
 
     fun getPosition(position: Int): Pokemon {
-        return listPokemon?.get(position)!!
+        return listPokemon.get(position)!!
 
     }
 
@@ -60,16 +61,35 @@ class ListPokemonAdapter(
 //        return if (listPokemon?.get(position) == null) TYPE_LOAD else TYPE_MOVIE
 //    }
 
+
+//    // add
+//     fun setListData(listData: List<Pokemon>?) {
+//        if (listPokemon == null) {
+//            listPokemon = listOf()
+//            listPokemon.add(listData)
+//            notifyDataSetChanged()
+//        } else {
+//            listPokemon.orEmpty()
+//            listPokemon.addAll(listData)
+//            notifyDataSetChanged()
+//        }
+//    }
+
+
     //lọc
     fun filter(name: String) {
         if (CommonF.isNullOrEmpty(name)) {
-            listPokemon?.let { setList(it) }
+            listPokemon.let {
+                setList(it)
+            }
         } else {
-            val orderList: ArrayList<Pokemon> =
-                java.util.ArrayList<Pokemon>()
-            for (item in this.listPokemon!!) {
-                if (item.name?.contains(name)!!) {
-                    orderList.add(item)
+            val orderList: ArrayList<Pokemon?> =
+                java.util.ArrayList<Pokemon?>()
+            for (item in this.listPokemon) {
+                if (item != null) {
+                    if (item.name?.contains(name)!!) {
+                        orderList.add(item)
+                    }
                 }
             }
             setList(orderList)
@@ -78,7 +98,7 @@ class ListPokemonAdapter(
     }
 
     override fun getItemCount(): Int {
-        return listPokemon!!.size
+        return listPokemon.size
     }
 
     /* VIEW HOLDERS */
@@ -98,7 +118,7 @@ class ListPokemonAdapter(
 
         fun bindData(pokemon: Pokemon?) {
             Picasso.get()
-                .load(Uri.parse(pokemon?.image))
+                .load(pokemon?.image)
                 .resize(50, 50)
                 .centerCrop()
                 .into(imageView)

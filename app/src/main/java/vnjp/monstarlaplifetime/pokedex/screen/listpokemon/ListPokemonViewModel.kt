@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import vnjp.monstarlaplifetime.pokedex.data.api.OperationCallback
 import vnjp.monstarlaplifetime.pokedex.data.models.Pokemon
-import vnjp.monstarlaplifetime.pokedex.data.response.PokemonResponse
 import vnjp.monstarlaplifetime.pokedex.data.respository.PokemonRepository
 
 @Suppress("UNCHECKED_CAST")
@@ -21,8 +20,8 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
         const val TAG = "TAG"
     }
 
-    private val _pokemonLoadMore = MutableLiveData<PokemonResponse>()
-    val pokemonloadMore: LiveData<PokemonResponse> = _pokemonLoadMore
+    private val _pokemonLoadMore = MutableLiveData<List<Pokemon>>()
+    val pokemonloadMore: LiveData<List<Pokemon>> = _pokemonLoadMore
     private val _isViewLoading = MutableLiveData<Boolean>()
     val isViewLoading: LiveData<Boolean> = _isViewLoading
 
@@ -32,7 +31,7 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
     private val _isEmptyList = MutableLiveData<Boolean>()
     val isEmptyList: LiveData<Boolean> = _isEmptyList
     // lấy dữ liệu từ server
-    fun loadPokemon() {
+    fun loadPokemon(page: Int) {
         _isViewLoading.postValue(true)
         repository.getAllPokemons(object : OperationCallback {
             override fun onError(obj: Any?) {
@@ -70,11 +69,12 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
                     if (obj.isEmpty()) {
                         //_isEmptyList.postValue(true)
                     } else {
-                        _pokemonLoadMore.value = obj as PokemonResponse?
+                        _pokemonLoadMore.value = obj as List<Pokemon>?
                     }
                 }
 
             }
         })
+
     }
 }
