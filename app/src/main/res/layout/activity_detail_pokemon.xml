@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
+        android:id="@+id/AppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -55,10 +55,10 @@
                     android:id="@+id/img_Water"
                     android:layout_width="130dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="6dp"
                     android:layout_below="@+id/tvNamePokemon"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginTop="6dp"
                     android:background="@null"
                     tools:ignore="ContentDescription" />
 
@@ -123,6 +123,19 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/textToolbarTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="62dp"
+                    android:gravity="center"
+                    android:text="sdsdsdsdsd"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="28sp"
+                    android:visibility="invisible"
+                    android:layout_marginRight="62dp" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

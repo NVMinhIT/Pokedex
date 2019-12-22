@@ -56,26 +56,6 @@ class ListPokemonAdapter(
         return listPokemon.get(position)!!
 
     }
-
-//    override fun getItemViewType(position: Int): Int {
-//        return if (listPokemon?.get(position) == null) TYPE_LOAD else TYPE_MOVIE
-//    }
-
-
-//    // add
-//     fun setListData(listData: List<Pokemon>?) {
-//        if (listPokemon == null) {
-//            listPokemon = listOf()
-//            listPokemon.add(listData)
-//            notifyDataSetChanged()
-//        } else {
-//            listPokemon.orEmpty()
-//            listPokemon.addAll(listData)
-//            notifyDataSetChanged()
-//        }
-//    }
-
-
     //lọc
     fun filter(name: String) {
         if (CommonF.isNullOrEmpty(name)) {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         const val BUNDLE_POKEMON_ID = "BUNDLE_POKEMON_ID"
         const val POKEMON_ID = "POKEMON_ID"
         const val POKEMON_TYPE = "POKEMON_TYPE"
+        const val NAME_POKEMON = "NAME_POKEMON"
         var pageIndex = 1
     }
 
@@ -60,8 +62,8 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
                 .get(ListPokemonViewModel::class.java)
         val view: View = inflater.inflate(R.layout.fragment_list_pokemon, container, false)
         initView(view)
+        initScrollListener()
         initViewModel()
-        initScrollListener();
         return view.rootView
     }
 
@@ -70,6 +72,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         viewModel.pokemonloadMore.observe(this, Observer {
             arr.addAll(it)
             listPokemonAdapter.setList(arr)
+            Log.d("LINH", "${arr.size}")
 
         })
         viewModel.isViewLoading.observe(this, Observer {
@@ -111,21 +114,23 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     }
 
     private fun loadMore() {
+
         arr.add(null)
         listPokemonAdapter.notifyItemInserted(arr.size - 1)
+        val scrollPosition: Int = arr.size - 1
+        listPokemonAdapter.notifyItemRemoved(arr.size)
+        arr.removeAt(arr.size - 1)
         val handler = Handler()
         handler.postDelayed(Runnable {
-            //arr.removeAt(arr.size + 1)
+            //arr.removeAt(arr.size - 1)
 
-            val scrollPosition: Int = arr.size
-//            listPokemonAdapter.notifyItemRangeInserted(
-//                scrollPosition,
-//                arr.size + 1
-//            )
-            listPokemonAdapter.notifyItemRemoved(scrollPosition)
             pageIndex++
             viewModel.loadPokemonLoadMore(pageIndex)
             listPokemonAdapter.notifyDataSetChanged()
+//            listPokemonAdapter.notifyItemRangeInserted(
+//                scrollPosition,
+//                arr.size
+//            )
             isLoading = false
         }, 2000)
     }
@@ -151,6 +156,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         val args = Bundle()
         args.putString(POKEMON_ID, pokemon?.id)
         args.putString(POKEMON_TYPE, s)
+        args.putString(NAME_POKEMON, pokemon?.name)
         val newFragment = WeakNessPokemonDialogFragment()
         newFragment.setArguments(args)
         newFragment.show(childFragmentManager, newFragment.javaClass.simpleName)
@@ -164,7 +170,11 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         initViewModel()
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        //initViewModel()
+        //initScrollListener()
+    }
 }
 
 
