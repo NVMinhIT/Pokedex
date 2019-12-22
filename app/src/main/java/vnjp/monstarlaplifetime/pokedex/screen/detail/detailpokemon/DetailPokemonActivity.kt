@@ -7,11 +7,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.emedinaa.kotlinmvvm.di.Injection
+import com.google.android.material.appbar.AppBarLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_pokemon.*
 import vnjp.monstarlaplifetime.pokedex.MyApp
@@ -29,12 +32,15 @@ import vnjp.monstarlaplifetime.pokedex.screen.listpokemon.ListPokemonFragment
 -- @Description
 
 */
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "DEPRECATED_IDENTITY_EQUALS")
 class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var viewModel: DetailsPokemonViewModel
     private var idPokemon: String? = null
     private var typePokemon: String? = null
     private var pokemon: Pokemon? = null
+    private var name: String? = null
+    lateinit var toolbar: Toolbar
+    private lateinit var toolbarTitle: TextView
     private var listMoves: List<Moves> = emptyList()
 
     companion object {
@@ -47,6 +53,8 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
         setTheme(R.style.MyPokemonTheme);
         setContentView(R.layout.activity_detail_pokemon)
         intent.extras?.let { bundle ->
+            name = bundle.getString(ListPokemonFragment.NAME_POKEMON)
+
             idPokemon = bundle.getString(ListPokemonFragment.BUNDLE_POKEMON_ID)
 
 
@@ -74,6 +82,7 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
     private fun setData() {
         tvNamePokemon.text = pokemon?.name
         tv_description_pokemon.text = pokemon?.description
+        toolbarTitle.text = pokemon?.name
         Picasso.get()
             .load(Uri.parse(pokemon?.image))
             .resize(170, 170)
@@ -104,14 +113,32 @@ class DetailPokemonActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initView() {
+        toolbar = findViewById(R.id.toolbar)
+        toolbarTitle = toolbar.findViewById(R.id.textToolbarTitle)
         val btStart = findViewById<Button>(R.id.btStart)
         val btEvolution = findViewById<Button>(R.id.btEvolution)
         val btMoves = findViewById<Button>(R.id.btMoves)
         val imbBack = findViewById<ImageButton>(R.id.imbBack)
         val fragment = StartFragment()
         supportFragmentManager.beginTransaction()
-            .add( R.id.content_frame_layout, fragment, fragment.javaClass.simpleName)
+            .add(R.id.content_frame_layout, fragment, fragment.javaClass.simpleName)
             .commit()
+
+        AppBarLayout.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+            override fun onStateChanged(appBarLayout: AppBarLayout?, state: State) {
+                when (state) {
+                    State.COLLAPSED -> {
+//                        nestedScrollView.background = getDrawable(R.drawable.background_conner)
+                        toolbarTitle.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        toolbarTitle.visibility = View.INVISIBLE
+//                        nestedScrollView.background = getDrawable(R.color.white)
+                    }
+                }
+            }
+
+        })
     }
 
     @SuppressLint("ResourceType")
