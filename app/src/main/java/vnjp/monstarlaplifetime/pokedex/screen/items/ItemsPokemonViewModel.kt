@@ -26,9 +26,9 @@ class ItemsPokemonViewModel(private val repository: PokemonRepository) : ViewMod
     private val _isEmptyList = MutableLiveData<Boolean>()
     val isEmptyList: LiveData<Boolean> = _isEmptyList
 
-    fun loadItems() {
+    fun loadItems(page: Int) {
         _isViewLoading.postValue(true)
-        repository.getAllItemsPokemon(object : OperationCallback {
+        repository.getAllItemsPokemon(page, object : OperationCallback {
             override fun onError(obj: Any?) {
                 Log.d(TAG, "No response")
                 _isViewLoading.postValue(false)

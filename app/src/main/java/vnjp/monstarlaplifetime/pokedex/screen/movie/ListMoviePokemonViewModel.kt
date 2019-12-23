@@ -26,9 +26,9 @@ class ListMoviePokemonViewModel(private val repository: PokemonRepository) : Vie
     private val _isEmptyList = MutableLiveData<Boolean>()
     val isEmptyList: LiveData<Boolean> = _isEmptyList
 
-    fun loadMovie() {
+    fun loadMovie(page: Int) {
         _isViewLoading.postValue(true)
-        repository.getAllMoviePokemon(object : OperationCallback {
+        repository.getAllMoviePokemon(page, object : OperationCallback {
             override fun onError(obj: Any?) {
                 Log.d(TAG, "No response")
                 _isViewLoading.postValue(false)

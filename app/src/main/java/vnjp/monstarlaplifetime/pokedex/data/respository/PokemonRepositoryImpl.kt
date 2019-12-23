@@ -65,13 +65,13 @@ class PokemonRepositoryImpl : PokemonRepository {
     }
 
     // lấy danh sách moves pokemon
-    override fun getAllMoviePokemon(callback: OperationCallback) {
+    override fun getAllMoviePokemon(page: Int, callback: OperationCallback) {
         if (!CommonF.isNetworkAvailable()) {
             CommonF.showToastError(R.string.noInternet)
             return
         }
         val apiService: ApiService = ServiceRetrofit().getService()
-        apiService.getAllMoviePokemon().enqueue(object : Callback<MoviePokemonResponse> {
+        apiService.getAllMoviePokemon(page).enqueue(object : Callback<MoviePokemonResponse> {
             override fun onResponse(
                 call: Call<MoviePokemonResponse>,
                 response: Response<MoviePokemonResponse>
@@ -121,13 +121,13 @@ class PokemonRepositoryImpl : PokemonRepository {
     }
 
     // lấy danh sách items pokemon
-    override fun getAllItemsPokemon(callback: OperationCallback) {
+    override fun getAllItemsPokemon(page: Int, callback: OperationCallback) {
         if (!CommonF.isNetworkAvailable()) {
             CommonF.showToastError(R.string.noInternet)
             return
         }
         val apiService: ApiService = ServiceRetrofit().getService()
-        apiService.getAllItems().enqueue(object : Callback<ItemsResponse> {
+        apiService.getAllItems(page).enqueue(object : Callback<ItemsResponse> {
             override fun onResponse(
                 call: Call<ItemsResponse>,
                 response: Response<ItemsResponse>

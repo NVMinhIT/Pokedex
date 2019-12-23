@@ -16,23 +16,30 @@ import vnjp.monstarlaplifetime.pokedex.data.models.Move
 import vnjp.monstarlaplifetime.pokedex.utils.CommonF
 
 class ListMovieAdapter(private val context: Context, private val itemClick: (Int) -> Unit) :
-    RecyclerView.Adapter<ListMovieAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var listSkill: List<Move> = emptyList()
+    private var listSkill: List<Move?> = emptyList()
     private val pos: Int? = null
 
     companion object {
-
+        const val TYPE_MOVIES = 0
+        const val TYPE_LOAD = 1
     }
+
+    fun setListSkill(list: List<Move?>) {
+        listSkill = list
+        notifyDataSetChanged()
+    }
+
     //lọc
     fun filterMoves(name: String) {
         if (CommonF.isNullOrEmpty(name)) {
             setListSkill(listSkill)
         } else {
-            val orderList: MutableList<Move> =
-                java.util.ArrayList<Move>()
+            val orderList: MutableList<Move?> =
+                java.util.ArrayList<Move?>()
             for (moves in listSkill) {
-                if (moves.name?.contains(name)!!) {
+                if (moves?.name?.contains(name)!!) {
                     orderList.add(moves)
                 }
             }
@@ -40,43 +47,29 @@ class ListMovieAdapter(private val context: Context, private val itemClick: (Int
         }
 
     }
-    fun setListSkill(list: List<Move>) {
-        listSkill = list
-        notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ListMovieAdapter.MyViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_skill_pokemon, parent, false)
-
-        return MyViewHolder(view)
-    }
-
-
-    override fun getItemCount(): Int {
-        return listSkill.size
-    }
-
-    override fun onBindViewHolder(holder: ListMovieAdapter.MyViewHolder, position: Int) {
-        val skill = listSkill[position]
-        holder.bind(skill)
-    }
 
     fun getPositionSkill(position: Int): Move {
-        return listSkill[position]
+        return listSkill[position]!!
 
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == TYPE_MOVIES) {
+            val view: View =
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_skill_pokemon, parent, false)
+            MyMovieHolder(view)
+        } else {
+            val view: View = LayoutInflater.from(parent.context)
+                .inflate(R.layout.items_loading, parent, false)
+            LoadmoviesHolder(view)
+        }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var isFirst = true
+    }
+
+    inner class MyMovieHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvNameSkill: TextView = itemView.findViewById(R.id.tvSkillPokemon)
-        //private val imageIconSkill: ImageView = itemView.findViewById(R.id.imgIconSkill)
         private val layout: LinearLayout = itemView.findViewById(R.id.contentLinearLayoutIcon)
-
 
         init {
             itemView.setOnClickListener {
@@ -85,13 +78,12 @@ class ListMovieAdapter(private val context: Context, private val itemClick: (Int
         }
 
 
+        fun bindData(move: Move) {
 
-        fun bind(skill: Move) {
-
-            tvNameSkill.text = skill.name
+            tvNameSkill.text = move.name
             val lsDrawabl: ArrayList<Drawable> = ArrayList()
-            val type = skill.type
-            skill.type?.let {
+            val type = move.type
+            move.type.let {
                 MyApp.pokemonTypeMapping.get(type)?.let { idDrawAble ->
                     ContextCompat.getDrawable(context, idDrawAble)?.let { icon ->
                         lsDrawabl.add(icon)
@@ -113,7 +105,20 @@ class ListMovieAdapter(private val context: Context, private val itemClick: (Int
 
 
         }
+    }
 
+    inner class LoadmoviesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
+
+    override fun getItemCount(): Int {
+        return listSkill.size
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val curent = listSkill.get(position)
+        curent?.let { (holder as MyMovieHolder).bindData(it) }
+    }
+
+
 }

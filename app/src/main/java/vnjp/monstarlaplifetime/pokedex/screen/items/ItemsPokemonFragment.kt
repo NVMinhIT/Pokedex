@@ -3,6 +3,8 @@ package vnjp.monstarlaplifetime.pokedex.screen.items
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,18 +17,25 @@ import com.emedinaa.kotlinmvvm.di.Injection
 import kotlinx.android.synthetic.main.fragment_item_pokemon.*
 import kotlinx.android.synthetic.main.fragment_list_pokemon.*
 import vnjp.monstarlaplifetime.pokedex.R
+import vnjp.monstarlaplifetime.pokedex.data.models.Items
 import vnjp.monstarlaplifetime.pokedex.screen.items.detail.DetailItemsActivity
+import vnjp.monstarlaplifetime.pokedex.screen.listpokemon.ListPokemonFragment
 import vnjp.monstarlaplifetime.pokedex.screen.main.MainActivity
 
 class ItemsPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
     private lateinit var itemsPokemonAdapter: ItemsPokemonAdapter
     private lateinit var viewModel: ItemsPokemonViewModel
+    private var arr: MutableList<Items?> = arrayListOf()
+    private lateinit var recyclerView: RecyclerView
+    var isLoading: Boolean = false
+
     fun newInstance(): ItemsPokemonFragment {
         return ItemsPokemonFragment()
     }
 
     companion object {
         const val BUNDLE_ITEM_ID = "BUNDLE_SKILL_ID"
+        var index = 1
     }
 
     override fun onAttach(context: Context) {
@@ -47,15 +56,19 @@ class ItemsPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
         val view = inflater.inflate(R.layout.fragment_item_pokemon, container, false)
         viewModel = ViewModelProviders.of(this, ItemsPokemonFactory(Injection.providerRepository()))
             .get(ItemsPokemonViewModel::class.java)
-        initViewModel()
         initView(view)
+        initScrollListener()
+        initViewModel()
+
         return view.rootView
     }
 
     private fun initViewModel() {
-        viewModel.loadItems()
+        viewModel.loadItems(1)
         viewModel.items.observe(this, Observer {
-            itemsPokemonAdapter.setListItems(it)
+            arr.addAll(it)
+            itemsPokemonAdapter.setListItems(arr)
+            Log.d("HIHI", "${arr.size}")
         })
         viewModel.isViewLoading.observe(this, Observer {
             val visibility = if (it) View.VISIBLE else View.GONE
@@ -67,20 +80,56 @@ class ItemsPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
             // textViewError.text= "Error $it"
         })
         viewModel.isEmptyList.observe(this, Observer {
-            layoutEmpty.visibility = View.VISIBLE
-            layoutError.visibility = View.GONE
+            //            layoutEmpty.visibility = View.VISIBLE
+//            layoutError.visibility = View.GONE
         })
     }
 
+    private fun initScrollListener() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager =
+                    recyclerView.layoutManager as LinearLayoutManager?
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == arr.size - 1) { //bottom of list!
+                        loadMore()
+                        isLoading = true
+                    }
+                }
+            }
+        })
+
+    }
+
+    private fun loadMore() {
+        arr.add(null)
+        itemsPokemonAdapter.notifyItemInserted(arr.size - 1)
+        itemsPokemonAdapter.notifyItemRemoved(arr.size)
+        arr.removeAt(arr.size - 1)
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            //arr.removeAt(arr.size - 1)
+            ListPokemonFragment.pageIndex++
+            viewModel.loadItems(ListPokemonFragment.pageIndex)
+            itemsPokemonAdapter.notifyDataSetChanged()
+            isLoading = false
+        }, 2000)
+    }
+
     private fun initView(view: View) {
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rvListItemPokemon)
+        recyclerView = view.findViewById(R.id.rvListItemPokemon)
         itemsPokemonAdapter = ItemsPokemonAdapter(this.requireContext()) {
             val intent = Intent(context, DetailItemsActivity::class.java)
             intent.putExtra(BUNDLE_ITEM_ID, itemsPokemonAdapter.getPositionItems(it).name)
             startActivity(intent)
         }
-        recyclerView?.layoutManager = LinearLayoutManager(context)
-        recyclerView?.adapter = itemsPokemonAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = itemsPokemonAdapter
     }
 
     override fun buttonClicked(name: String) {
