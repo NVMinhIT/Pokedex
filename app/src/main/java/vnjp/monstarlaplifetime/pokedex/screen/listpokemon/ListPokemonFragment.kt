@@ -29,10 +29,8 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutManager: LinearLayoutManager
     var arr: MutableList<Pokemon?> = arrayListOf()
-    var arrayy: MutableList<Pokemon?> = arrayListOf()
-    // you can pass 1,2,3...
     var isLoading: Boolean = false
-    var total: Int = 0
+
 
     companion object {
         const val BUNDLE_POKEMON_ID = "BUNDLE_POKEMON_ID"
@@ -64,6 +62,8 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         initView(view)
         initScrollListener()
         initViewModel()
+
+
         return view.rootView
     }
 
@@ -86,8 +86,8 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
 
         })
         viewModel.isEmptyList.observe(this, Observer {
-            layoutEmpty.visibility = View.VISIBLE
-            layoutError.visibility = View.GONE
+//            layoutEmpty.visibility = View.VISIBLE
+//            layoutError.visibility = View.GONE
         })
 
     }
@@ -114,7 +114,6 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     }
 
     private fun loadMore() {
-
         arr.add(null)
         listPokemonAdapter.notifyItemInserted(arr.size - 1)
         val scrollPosition: Int = arr.size - 1
@@ -123,18 +122,12 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         val handler = Handler()
         handler.postDelayed(Runnable {
             //arr.removeAt(arr.size - 1)
-
             pageIndex++
             viewModel.loadPokemonLoadMore(pageIndex)
             listPokemonAdapter.notifyDataSetChanged()
-//            listPokemonAdapter.notifyItemRangeInserted(
-//                scrollPosition,
-//                arr.size
-//            )
             isLoading = false
         }, 2000)
     }
-
 
     private fun initView(view: View) {
         recyclerView = view.findViewById(R.id.rvListPokemon)
@@ -172,8 +165,6 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
 
     override fun onResume() {
         super.onResume()
-        //initViewModel()
-        //initScrollListener()
     }
 }
 

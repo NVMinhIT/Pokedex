@@ -25,7 +25,7 @@ interface ApiService {
 
     @Headers("Accept: application/json")
     @GET("moves")
-    fun getAllMoviePokemon(): Call<MoviePokemonResponse>
+    fun getAllMoviePokemon(@Query("page") page: Int): Call<MoviePokemonResponse>
 
     @Headers("Accept: application/json")
     @GET("moves/{name}")
@@ -33,7 +33,7 @@ interface ApiService {
 
     @Headers("Accept: application/json")
     @GET("items")
-    fun getAllItems(): Call<ItemsResponse>
+    fun getAllItems(@Query("page") page: Int): Call<ItemsResponse>
 
     @Headers("Accept: application/json")
     @GET("items/{name}")

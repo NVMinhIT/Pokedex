@@ -2,7 +2,6 @@ package vnjp.monstarlaplifetime.pokedex.screen.listpokemon
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +48,17 @@ class ListPokemonAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val curent = listPokemon.get(position)
         (holder as MovieHolder).bindData(curent)
+
+        if (holder is LoadHolder) {
+            showLoadingView(
+                holder as LoadHolder,
+                position
+            )
+        }
+    }
+
+    private fun showLoadingView(loadHolder: LoadHolder, position: Int) {
+
     }
 
 
@@ -56,6 +66,7 @@ class ListPokemonAdapter(
         return listPokemon.get(position)!!
 
     }
+
     //lọc
     fun filter(name: String) {
         if (CommonF.isNullOrEmpty(name)) {

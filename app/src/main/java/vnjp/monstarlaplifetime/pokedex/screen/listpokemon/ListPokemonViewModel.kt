@@ -55,19 +55,19 @@ class ListPokemonViewModel(private val repository: PokemonRepository) : ViewMode
     }
 
     fun loadPokemonLoadMore(page: Int) {
-        // _isViewLoading.postValue(true)
+        _isViewLoading.postValue(true)
         repository.getAllPokemonLoadMore(page, object : OperationCallback {
             override fun onError(obj: Any?) {
                 Log.d(TAG, "No response")
-                // _isViewLoading.postValue(false)
-                // _onMessageError.postValue(obj)
+                _isViewLoading.postValue(false)
+                _onMessageError.postValue(obj)
             }
 
             override fun onSuccess(obj: Any?) {
-                //_isViewLoading.postValue(false)
+                _isViewLoading.postValue(false)
                 if (obj != null && obj is List<*>) {
                     if (obj.isEmpty()) {
-                        //_isEmptyList.postValue(true)
+                        _isEmptyList.postValue(true)
                     } else {
                         _pokemonLoadMore.value = obj as List<Pokemon>?
                     }
