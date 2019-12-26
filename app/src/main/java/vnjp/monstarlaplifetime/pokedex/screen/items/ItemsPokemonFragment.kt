@@ -25,7 +25,7 @@ import vnjp.monstarlaplifetime.pokedex.screen.main.MainActivity
 class ItemsPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
     private lateinit var itemsPokemonAdapter: ItemsPokemonAdapter
     private lateinit var viewModel: ItemsPokemonViewModel
-    private var arr: MutableList<Items?> = arrayListOf()
+    private var arr: MutableList<Items?> = mutableListOf()
     private lateinit var recyclerView: RecyclerView
     var isLoading: Boolean = false
 
@@ -57,8 +57,8 @@ class ItemsPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
         viewModel = ViewModelProviders.of(this, ItemsPokemonFactory(Injection.providerRepository()))
             .get(ItemsPokemonViewModel::class.java)
         initView(view)
-        initScrollListener()
         initViewModel()
+        initScrollListener()
 
         return view.rootView
     }

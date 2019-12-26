@@ -11,7 +11,5 @@ interface PokemonRepository {
     fun getDetailPokemonById(id: String, callback: OperationCallback)
     fun getWeakNesses(type: String, callback: OperationCallback)
     fun getAllPokemonLoadMore(Page: Int, callback: OperationCallback)
-
-
     fun cancel()
 }

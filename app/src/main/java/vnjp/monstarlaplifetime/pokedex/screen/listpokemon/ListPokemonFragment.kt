@@ -28,7 +28,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
     private lateinit var viewModel: ListPokemonViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutManager: LinearLayoutManager
-    var arr: MutableList<Pokemon?> = arrayListOf()
+    private var arr: MutableList<Pokemon?> = mutableListOf()
     var isLoading: Boolean = false
 
 
@@ -46,7 +46,6 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
             if (activity is MainActivity) {
                 (activity as MainActivity).setMyinterFace(this)
             }
-
         }
     }
 
@@ -60,10 +59,8 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
                 .get(ListPokemonViewModel::class.java)
         val view: View = inflater.inflate(R.layout.fragment_list_pokemon, container, false)
         initView(view)
-        initScrollListener()
         initViewModel()
-
-
+        initScrollListener()
         return view.rootView
     }
 
@@ -86,7 +83,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
 
         })
         viewModel.isEmptyList.observe(this, Observer {
-//            layoutEmpty.visibility = View.VISIBLE
+            //            layoutEmpty.visibility = View.VISIBLE
 //            layoutError.visibility = View.GONE
         })
 
@@ -117,11 +114,13 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
         arr.add(null)
         listPokemonAdapter.notifyItemInserted(arr.size - 1)
         val scrollPosition: Int = arr.size - 1
-        listPokemonAdapter.notifyItemRemoved(arr.size)
         arr.removeAt(arr.size - 1)
+        listPokemonAdapter.notifyItemRemoved(arr.size)
+        listPokemonAdapter.notifyItemRangeInserted(scrollPosition, arr.size)
+        recyclerView.scrollToPosition(scrollPosition - 1)
+        //arr.removeAt(arr.size - 1)
         val handler = Handler()
         handler.postDelayed(Runnable {
-            //arr.removeAt(arr.size - 1)
             pageIndex++
             viewModel.loadPokemonLoadMore(pageIndex)
             listPokemonAdapter.notifyDataSetChanged()
@@ -165,6 +164,7 @@ class ListPokemonFragment : Fragment(), ListPokemonAdapter.ILongClickItemCategor
 
     override fun onResume() {
         super.onResume()
+        // initScrollListener()
     }
 }
 

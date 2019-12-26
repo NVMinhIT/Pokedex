@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.frLayout, fragment, fragment.javaClass.simpleName)
                     .commit()
-                return true
+                //return true
             }
 
             R.id.action_disk -> {
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.frLayout, fragmentList, fragmentList.javaClass.simpleName)
                     .commit()
-                return true
+                //return true
             }
             R.id.action_itens -> {
                 tvTitle.text = "Items"
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.frLayout, fragmentItems, fragmentItems.javaClass.simpleName)
                     .commit()
-                return true
+                //return true
             }
         }
         selectedId = itemId
@@ -120,7 +120,6 @@ class MainActivity : AppCompatActivity() {
         fun buttonClicked(name: String)
         fun loadPokemon()
     }
-
 
 
 }
