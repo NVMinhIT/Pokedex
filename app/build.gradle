@@ -64,14 +64,11 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.0-beta01"
     kapt "androidx.room:room-compiler:2.2.0-beta01"
     androidTestImplementation "androidx.room:room-testing:2.2.0-beta01"
-
     def coroutines_version = "1.2.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
-
-
     def retrofit_version = "2.6.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     // JSON Parsing

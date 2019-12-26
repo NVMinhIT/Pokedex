@@ -50,15 +50,9 @@ class ListPokemonAdapter(
         (holder as MovieHolder).bindData(curent)
 
         if (holder is LoadHolder) {
-            showLoadingView(
-                holder as LoadHolder,
-                position
-            )
+            val loadingViewHolder: LoadHolder = holder as LoadHolder
+            loadingViewHolder.progressBar.setIndeterminate(true)
         }
-    }
-
-    private fun showLoadingView(loadHolder: LoadHolder, position: Int) {
-
     }
 
 
@@ -151,7 +145,7 @@ class ListPokemonAdapter(
 
     inner class LoadHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        private var progressBar: ProgressBar
+        var progressBar: ProgressBar
 
         init {
             progressBar = itemView.findViewById(R.id.progressBarLoading)

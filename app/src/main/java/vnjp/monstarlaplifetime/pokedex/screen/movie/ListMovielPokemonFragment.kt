@@ -24,7 +24,7 @@ class ListMovielPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
     private lateinit var listSkillAdapter: ListMovieAdapter
     private lateinit var viewmodel: ListMoviePokemonViewModel
     private lateinit var recyclerView: RecyclerView
-    private var arr: MutableList<Move?> = arrayListOf()
+    private var arr: MutableList<Move?> = mutableListOf()
     private var isLoading: Boolean = false
     fun newInstance(): ListMovielPokemonFragment {
         return ListMovielPokemonFragment()
@@ -55,9 +55,8 @@ class ListMovielPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
         viewmodel =
             ViewModelProviders.of(this, ListMoviePokemonFactory(Injection.providerRepository()))
                 .get(ListMoviePokemonViewModel::class.java)
-        initScrollListener()
         initViewModel()
-
+        initScrollListener()
         return view.rootView
     }
 
@@ -116,7 +115,7 @@ class ListMovielPokemonFragment : Fragment(), MainActivity.MyInterfacePokemon {
             // textViewError.text= "Error $it"
         })
         viewmodel.isEmptyList.observe(this, Observer {
-//            layoutEmpty.visibility = View.VISIBLE
+            //            layoutEmpty.visibility = View.VISIBLE
 //            layoutError.visibility = View.GONE
         })
     }
